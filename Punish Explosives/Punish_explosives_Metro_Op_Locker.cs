@@ -4,7 +4,7 @@ Set the limit to evaluate OnKill and set the Action to None.
 
 Set first_check to this Expression: */
 /*---------- With exeptions------------*/
-(Regex.Match(server.MapFileName, @"(?:MP_Prison|XP0_Metro)", RegexOptions.IgnoreCase).Success && (Regex.Match(kill.Weapon, @"(AA Mine|M320|LVG|HE|3GL|AT4|C4|Claymore|FGM148|FIM92|FLASH|Flashbang|GrenadeRGO|M15|M224|M34|M67|MGL|NLAW|RPG7|Sa18IGLA|SLAM|SMAW|SRAW|Starstreak|Tomahawk|UCAV|V40|XM25|ROADKILL|Death)", RegexOptions.IgnoreCase).Success && !Regex.Match(kill.Weapon, @"(SMK|Smoke|Flechette|Slug|Suicide|SoldierCollision|DamageArea)", RegexOptions.IgnoreCase).Success))
+(Regex.Match(server.MapFileName, @"(?:MP_Prison|XP0_Metro)", RegexOptions.IgnoreCase).Success && (Regex.Match(kill.Weapon, @"(AA Mine|M320|LVG|HE|3GL|AT4|C4|Claymore|FGM148|FIM92|FLASH|Flashbang|GrenadeRGO|M15|M224|M34|M67|MGL|NLAW|RPG7|Sa18IGLA|SLAM|SMAW|SRAW|Starstreak|Tomahawk|UCAV|V40|XM25|ROADKILL|Death)", RegexOptions.IgnoreCase).Success && !Regex.Match(kill.Weapon, @"(SMK|Smoke|Suicide|SoldierCollision|DamageArea)", RegexOptions.IgnoreCase).Success))
 /* Set second_check to this Code: */
 /* Version: V0.9.15/R1 */
 String kCounter = killer.Name + "_TreatAsOne_Count";
