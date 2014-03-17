@@ -1,4 +1,5 @@
-/* BF4 for BOTH Locker and Metro 2014
+/* https://forum.myrcon.com/showthread.php?4014-Insane-Limits-Punish-explosives-M320-RPG-USAS-Metro-Op-Locker
+BF4 for BOTH Locker and Metro 2014
 Set the limit to evaluate OnKill and set the Action to None.
 
 Set first_check to this Expression: */

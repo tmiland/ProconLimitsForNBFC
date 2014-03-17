@@ -1,6 +1,7 @@
-/* AA Notices */
-/* OnSpawn */
-/* first check code: */
+/* https://forum.myrcon.com/showthread.php?7617-Insane-Limits-Mobile-Anti-Air-and-AA-Mine-Limit
+AA Notices
+OnSpawn
+first check code: */
 /* Version 9.16/R1a */
 /* SETUP */
 

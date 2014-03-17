@@ -1,6 +1,7 @@
-/* Prohibit AA Mine */
-/* OnKill */
-/* First check code: */
+/* https://forum.myrcon.com/showthread.php?7617-Insane-Limits-Mobile-Anti-Air-and-AA-Mine-Limit
+Prohibit AA Mine
+OnKill
+First check code: */
 /* Version 9.16/R4 */
 /* SETUP */
 
