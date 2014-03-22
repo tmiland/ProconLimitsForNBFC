@@ -8,6 +8,8 @@ victim.RoundData.setObject(key, (Object)DateTime.Now);
 String weapon = plugin.FriendlyWeaponName(kill.Weapon).Name;
 plugin.ConsoleWrite("TK log: ^7^b" + victim.Name + "^n was TK by ^b" + killer.Name + " with " + weapon);
 plugin.PRoConChat("TK log > " + victim.Name + " was TK by " + killer.Name + " with " + weapon);
+plugin.SendPlayerMessage(killer.Name, "You team-killed " + victim.Name + "!"); // CHANGE
+plugin.SendPlayerMessage(victim.Name, "You were team-killed by " + killer.Name + ", type !punish to punish."); // CHANGE
 return false;
 /* Create a limit to evaluate OnAnyChat, call it "TK Punisher", leave Action set to None.
 
@@ -15,7 +17,7 @@ Set first_check to this Code: */
 double timeToPunishSeconds = 60; // victim has 60 seconds to punish team killer
 String key = "Last_TK";
 
-if (Regex.Match(player.LastChat, @"^\s*[!@#]punish", RegexOptions.IgnoreCase).Success) {
+if (Regex.Match(player.LastChat, @"^\s*[!@#](p$|p\s|punish)", RegexOptions.IgnoreCase).Success) {
     if (!player.RoundData.issetObject(key) || !player.RoundData.issetString(key)) {
         plugin.SendPlayerMessage(player.Name, "There is no team-killer to punish!");
         return false;
