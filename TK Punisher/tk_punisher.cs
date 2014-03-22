@@ -9,7 +9,9 @@ String weapon = plugin.FriendlyWeaponName(kill.Weapon).Name;
 plugin.ConsoleWrite("TK log: ^7^b" + victim.Name + "^n was TK by ^b" + killer.Name + " with " + weapon);
 plugin.PRoConChat("TK log > " + victim.Name + " was TK by " + killer.Name + " with " + weapon);
 plugin.SendPlayerMessage(killer.Name, "You team-killed " + victim.Name + "!"); // CHANGE
-plugin.SendPlayerMessage(victim.Name, "You were team-killed by " + killer.Name + ", type !punish to punish."); // CHANGE
+plugin.SendPlayerMessage(victim.Name, "You were team-killed by " + killer.Name + ", type !p or !punish to punish."); // CHANGE
+plugin.SendPlayerYell(killer.Name, "You team-killed " + victim.Name + "!", 8); // CHANGE
+plugin.SendPlayerYell(victim.Name, "You were team-killed by " + killer.Name + ", type !p or !punish to punish", 8); // CHANGE
 return false;
 /* Create a limit to evaluate OnAnyChat, call it "TK Punisher", leave Action set to None.
 
