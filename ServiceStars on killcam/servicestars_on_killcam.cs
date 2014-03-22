@@ -1,4 +1,5 @@
-/* First limit
+/* https://forum.myrcon.com/showthread.php?7383-Insane-Limits-Service-Stars-V0-2
+First limit
 
 OnAnyChat
 Expression */
