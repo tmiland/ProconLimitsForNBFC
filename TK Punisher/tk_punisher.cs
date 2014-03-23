@@ -1,18 +1,4 @@
 /* https://forum.myrcon.com/showthread.php?6894-Insane-Limits-V0-9-R0-!punish-!forgive-Team-Kills&p=99483&viewfull=1#post99483
-Create a limit to evaluate OnTeamKill, call it "Last TK Name", leave Action set to None.
-
-Set first_check to this Code: */
-String key = "Last_TK";
-victim.RoundData.setString(key, killer.Name);
-victim.RoundData.setObject(key, (Object)DateTime.Now);
-String weapon = plugin.FriendlyWeaponName(kill.Weapon).Name;
-plugin.ConsoleWrite("TK log: ^7^b" + victim.Name + "^n was TK by ^b" + killer.Name + " with " + weapon);
-plugin.PRoConChat("TK log > " + victim.Name + " was TK by " + killer.Name + " with " + weapon);
-plugin.SendPlayerMessage(killer.Name, "You team-killed " + victim.Name + "!"); // CHANGE
-plugin.SendPlayerMessage(victim.Name, "You were team-killed by " + killer.Name + ", type !p or !punish to punish."); // CHANGE
-plugin.SendPlayerYell(killer.Name, "You team-killed " + victim.Name + "!", 8); // CHANGE
-plugin.SendPlayerYell(victim.Name, "You were team-killed by " + killer.Name + ", type !p or !punish to punish", 8); // CHANGE
-return false;
 /* Create a limit to evaluate OnAnyChat, call it "TK Punisher", leave Action set to None.
 
 Set first_check to this Code: */
@@ -34,7 +20,7 @@ if (Regex.Match(player.LastChat, @"^\s*[!@#](p$|p\s|punish)", RegexOptions.Ignor
     }
     // Punishment
     plugin.SendPlayerMessage(player.Name, tker + " will be punished in 5 seconds!");
-    plugin.ConsoleWrite("TK log: victim ^7^b" + player.Name + "^n punished ^b" + tker + " for team killing!");
+    plugin.ConsoleWrite("TeamKill log: victim ^7^b" + player.Name + "^n punished ^b" + tker + " for team killing!");
     String msg = player.FullName + " punished you for team-killing and not apologizing!"; // CHANGE
     plugin.SendPlayerMessage(tker, msg);
     plugin.SendPlayerYell(tker, "You have been punished for team-killing " + player.FullName, 10); // CHANGE
