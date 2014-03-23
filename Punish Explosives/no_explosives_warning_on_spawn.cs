@@ -9,7 +9,7 @@ String msg1 = "WARNING: You will be AUTO-KICKED if you use EXPLOSIVES!";
 String msg2 = "Please type @rules in chat to see the Server Rules.";
 
 // Times
-int yellTime = 10; // seconds
+int yellTime = 20; // seconds
 int secondNoticeSpawnCount = 3;
 
 /* CODE */
