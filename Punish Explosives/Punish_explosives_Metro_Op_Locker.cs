@@ -25,6 +25,7 @@ if (warnings == 0) {
         plugin.SendPlayerYell(killer.Name, msg, 10);
         plugin.PRoConChat("ADMIN > " + msg);
 		plugin.SendGlobalMessage(msg);
+		plugin.ConsoleWrite("^b^1ILLEGAL WEAPON!^0^n " + killer.FullName + " used " + kill.Weapon + " against " + victim.FullName);
         plugin.KillPlayer(killer.Name, 3);
         server.RoundData.setInt(kCounter, warnings+1);
         return false;
@@ -47,6 +48,7 @@ if (warnings == 1) {
         plugin.ServerCommand("admin.say", msg, "player", killer.Name);
         plugin.SendPlayerYell(killer.Name, msg, 10);
         plugin.PRoConChat("ADMIN > " + msg);
+		plugin.ConsoleWrite("^b^1ILLEGAL WEAPON!^0^n " + killer.FullName + " used " + kill.Weapon + " against " + victim.FullName);
         plugin.KillPlayer(killer.Name, 3);
 } else if (warnings == 2) {
         msg = plugin.R("Kicking %k_n% for ignoring warnings and killing with %w_n%!");

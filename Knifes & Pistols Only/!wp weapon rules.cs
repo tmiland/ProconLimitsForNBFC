@@ -14,7 +14,7 @@ Weapons.Add("Happy hunting! ;-)");
 Action<String> WeaponsMethod = delegate(String who) { // how to send the rules
 	foreach (string Rule in Weapons) { // set up the way the rules are sent
 		plugin.ServerCommand("admin.say", Rule, "player", who);
-		plugin.ServerCommand ( "admin.yell" , Rule , "12" , "player" , who) ;
+		plugin.ServerCommand ( "admin.yell" , Rule , "12" , "player" , who);
 	}
 };
 
