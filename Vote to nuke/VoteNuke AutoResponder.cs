@@ -1,6 +1,6 @@
 /* First check
 Expression */
-(Regex.Match(player.LastChat, @"(?:base\s*rape|raping|camping)", RegexOptions.IgnoreCase).Success)
+(Regex.Match(player.LastChat, @"(?:base\s*rape)", RegexOptions.IgnoreCase).Success)
 /* Second check
 Code: */
 double tsec = 0;
