@@ -1,35 +1,8 @@
 /* https://forum.myrcon.com/showthread.php?7383-Insane-Limits-Service-Stars-V0-2
-First limit
-
-OnAnyChat
-Expression */
-player.LastChat.StartsWith("@ss")
-/* Code: */
-if (!player.Data.issetBool("NoYell")) {
-	player.Data.setBool("NoYell", false);
-	plugin.SendPlayerYell(player.Name, plugin.R ("\nMessages on"),5);
-	return false;
-	}
-
-if(player.Data.getBool("NoYell")) {
-player.Data.setBool("NoYell", false);
-plugin.SendPlayerYell(player.Name, plugin.R ("\nMessages on"),5);
-}
-else {
-player.Data.setBool("NoYell", true);
-plugin.SendPlayerYell(player.Name, plugin.R ("\nMessages off"),5);
-}
-return false;
-/* Second Limit
-
+ServiceStars On KillCam
 OnDeath
 Code: */
-if (!player.Data.issetBool("NoYell"))
-	player.Data.setBool("NoYell", true);
-
-if (player.Data.getBool("NoYell")) 
-	return false;
-else {
+/* Just display the service stars on killcam */
 	if (killer.Name != null) {
 		BattlelogWeaponStatsInterface WeaponStats = killer.GetBattlelog(kill.Weapon);			
 		if (WeaponStats != null) {
@@ -40,7 +13,5 @@ else {
 			plugin.SendPlayerYell(player.Name, plugin.R ("\nKiller: " +killer.Name+ " with " + (plugin.FriendlyWeaponName(kill.Weapon).Name) + "\nService Stars: " + ServiceStars + "\n" + WeaponUsagePercentage + "% of all "  + killer.Kills + " kills."), 6);
 			}
 		}
-	}				
-}
-
-return false;
+	}
+	return false;
