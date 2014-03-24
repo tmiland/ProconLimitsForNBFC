@@ -1,4 +1,5 @@
-/* Create a new limit and set it Enabled. Set limit to evaluate OnDeath, set the name to Squad Recruiter, set the action to None.
+/* https://forum.myrcon.com/showthread.php?3877-Insane-Limits-V0-8-R4-Squad-Recruiter
+Create a new limit and set it Enabled. Set limit to evaluate OnDeath, set the name to Squad Recruiter, set the action to None.
 
 Set first_check to this Code: */
 /* Version: V0.8/R4 */
@@ -148,7 +149,11 @@ Attempt the move - this may fail for multiple reasons.
 We'll give it two tries and then give up by putting player in the cooldown pool
 */
 
-String[] squadName = new String[9]{"No Squad", "Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel"};
+String[] squadName = new String[9]{"None",
+      "Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel",
+      "India", "Juliet", "Kilo", "Lima", "Mike", "November", "Oscar", "Papa",
+      "Quebec", "Romeo", "Sierra", "Tango", "Uniform", "Victor", "Whiskey", "Xray",
+      "Yankee", "Zulu", "Haggard", "Sweetwater", "Preston", "Redford", "Faith", "Celeste"};
 String sqn = (targetSquad > 8) ? ("Squad-" + targetSquad) : squadName[targetSquad];
 
 if (level >= 2) plugin.ConsoleWrite("^b[SQR]^n: ^b^4MOVE^0^n " + victim.FullName + " to " + sqn + " on " + teamName);
