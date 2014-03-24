@@ -1,5 +1,4 @@
-/* https://forum.myrcon.com/showthread.php?3877-Insane-Limits-V0-8-R4-Squad-Recruiter
-Create a new limit and set it Enabled. Set limit to evaluate OnAnyChat, set the name to Squad Recruiter Commands, set the action to None.
+/* Create a new limit and set it Enabled. Set limit to evaluate OnAnyChat, set the name to Squad Recruiter Commands, set the action to None.
 
 Set first_check to this Expression: */
 ( Regex.Match(server.Gamemode, "^(?:Conquest|Rush|Domination)", RegexOptions.IgnoreCase).Success && (Regex.Match(player.LastChat, @"^\s*[!](?:recruit|draft)", RegexOptions.IgnoreCase).Success
@@ -184,7 +183,7 @@ if (rMatch.Success) {
     Dictionary<String,int> teamCadets = (Dictionary<String,int>)server.RoundData.getObject(kCadets);
     teamCadets.Add(recruit.Name, player.SquadId);
     if (level >= 2) {
-        String[] squadName = new String[9]{"None",
+        String[] squadName = new String[]{"None",
       "Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel",
       "India", "Juliet", "Kilo", "Lima", "Mike", "November", "Oscar", "Papa",
       "Quebec", "Romeo", "Sierra", "Tango", "Uniform", "Victor", "Whiskey", "Xray",

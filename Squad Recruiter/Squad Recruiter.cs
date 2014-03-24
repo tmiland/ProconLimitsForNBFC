@@ -149,7 +149,7 @@ Attempt the move - this may fail for multiple reasons.
 We'll give it two tries and then give up by putting player in the cooldown pool
 */
 
-String[] squadName = new String[9]{"None",
+String[] squadName = new String[]{"None",
       "Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel",
       "India", "Juliet", "Kilo", "Lima", "Mike", "November", "Oscar", "Papa",
       "Quebec", "Romeo", "Sierra", "Tango", "Uniform", "Victor", "Whiskey", "Xray",
