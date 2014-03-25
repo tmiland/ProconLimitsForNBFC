@@ -4,7 +4,7 @@ Set first_check to this Expression: */
 ( Regex.Match(server.Gamemode, "^(?:Conquest|Rush|Domination)", RegexOptions.IgnoreCase).Success && (Regex.Match(player.LastChat, @"^\s*[!](?:recruit|draft)", RegexOptions.IgnoreCase).Success
 || Regex.Match(player.LastChat, @"(?:squad|clan|friend|mate)", RegexOptions.IgnoreCase).Success))
 /* Set second_check to this Code: */
-/* Version: V0.8/R4
+/* Version: V9.16/R5
 !recruit name
 - Attempts to move the soldier matching "name" to the player's squad.
 
@@ -17,8 +17,8 @@ String admins = "admins"; // Define the name of your admins list here
 String admin_tags = "admin_tags"; // Define the name of your admin tag list here
 
 String prefix = "SQR_";
-String kUSCadets = prefix + "US_cadets"; // server.RoundData
-String kRUCadets = prefix + "RU_cadets"; // server.RoundData
+String kT1Cadets = prefix + "T1_cadets"; // server.RoundData
+String kT2Cadets = prefix + "T2_cadets"; // server.RoundData
 String kDraft = prefix + "draft"; // plugin.Data
 String kCooldown = prefix + "cooldown"; // server.RoundData
 
@@ -53,7 +53,7 @@ Action<String> ChatPlayer = delegate(String who) {
 if (rMatch.Success) {
     // Add to list of cadets that need a squad
     String rName = rMatch.Groups[1].Value;
-    PlayerInfoInterface recruit = plugin.GetPlayer(rName, true);
+    PlayerInfoInterface recruit = null;
     // Check if requesting info
     if (rName == "?") {
         if (level >= 2) plugin.ConsoleWrite("^b[SQR]^n: " + player.FullName + " requested info");
@@ -70,6 +70,27 @@ if (rMatch.Success) {
         ChatPlayer(player.Name);
         return false;
     }
+    // Find matching players
+    List<PlayerInfoInterface> all = new List<PlayerInfoInterface>();
+    all.AddRange(team1.players);
+    all.AddRange(team2.players);
+    List<PlayerInfoInterface> found = new List<PlayerInfoInterface>();
+    List<String> fNames = new List<String>();
+    foreach (PlayerInfoInterface p in all) {
+        if (Regex.Match(p.Name, rName, RegexOptions.IgnoreCase).Success) {
+            found.Add(p);
+            fNames.Add(p.Name);
+        }
+    }
+    if (found.Count > 1) {
+        msg = "'" + rName + "' matches: " + String.Join(",", fNames.ToArray());
+        if (level >= 2) plugin.ConsoleWrite("^b[SQR]^n: " + msg);
+        msg = "*** Try again: " + msg;
+        ChatPlayer(player.Name);
+        return false; 
+    } else if (found.Count == 1) {
+        recruit = found[0];
+    }
     // Check if there is a player by that name
     if (recruit == null) {
         if (level >= 2) plugin.ConsoleWrite("^b[SQR]^n: no such player: " + rName);
@@ -77,13 +98,7 @@ if (rMatch.Success) {
         ChatPlayer(player.Name);
         return false;
     }
-    
-    // Tell player what name we are trying to use
-    msg = "*** Closest match to '" + rName + "' is " + recruit.FullName;
-    ChatPlayer(player.Name);
-    msg = "*** " + player.FullName + " is trying to recruit you to his squad";
-    ChatPlayer(recruit.Name);
-    
+
     // Check if requestor is not in a squad
     if (player.SquadId == 0) {
         if (level >= 2) plugin.ConsoleWrite("^b[SQR]^n: player not in a squad: " + player.FullName);
@@ -98,6 +113,13 @@ if (rMatch.Success) {
         ChatPlayer(player.Name);
         return false;
     }
+    
+    // Tell player what name we are trying to use
+    msg = "*** Closest match to '" + rName + "' is " + recruit.FullName;
+    ChatPlayer(player.Name);
+    msg = "*** " + player.FullName + " is trying to recruit you to his squad";
+    ChatPlayer(recruit.Name);
+    
 
     // Extract tags for further testing
     String ptag = player.Tag;
@@ -134,6 +156,7 @@ if (rMatch.Success) {
             return false;
         }
     }
+/*
     // Check if recruit is already in a squad (only matching tags may recruit)
     if (recruit.SquadId != 0) {
         // Check if tags don't match
@@ -148,6 +171,7 @@ if (rMatch.Success) {
             return false;
         }
     }
+*/
 /*
     // Check if squad id is above 8 as of R20 patch
     if (player.SquadId > 8) {
@@ -176,20 +200,25 @@ if (rMatch.Success) {
         }
     }
     // Add to list
-    String kCadets = (player.TeamId == 1) ? kUSCadets : kRUCadets;
+    String kCadets = (player.TeamId == 1) ? kT1Cadets : kT2Cadets;
     if (!server.RoundData.issetObject(kCadets)) {
         server.RoundData.setObject(kCadets, new Dictionary<String,int>());
     }
     Dictionary<String,int> teamCadets = (Dictionary<String,int>)server.RoundData.getObject(kCadets);
-    teamCadets.Add(recruit.Name, player.SquadId);
+    int teamSquad = (1000 * player.TeamId) + player.SquadId;
+    teamCadets.Add(recruit.Name, teamSquad);
     if (level >= 2) {
-        String[] squadName = new String[]{"None",
-      "Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel",
-      "India", "Juliet", "Kilo", "Lima", "Mike", "November", "Oscar", "Papa",
-      "Quebec", "Romeo", "Sierra", "Tango", "Uniform", "Victor", "Whiskey", "Xray",
-      "Yankee", "Zulu", "Haggard", "Sweetwater", "Preston", "Redford", "Faith", "Celeste"};
-        String sqn = (player.SquadId > 8) ? ("Squad-" + player.SquadId) : squadName[player.SquadId];
-        String teamName = (player.TeamId == 1) ? "US" : "RU";
+        String[] squadName = new String[] { "None",
+          "Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel",
+          "India", "Juliet", "Kilo", "Lima", "Mike", "November", "Oscar", "Papa",
+          "Quebec", "Romeo", "Sierra", "Tango", "Uniform", "Victor", "Whiskey", "Xray",
+          "Yankee", "Zulu", "Haggard", "Sweetwater", "Preston", "Redford", "Faith", "Celeste"
+        };
+        String sqn = (player.SquadId >= 0) ? squadName[player.SquadId] : "?";
+        String[] factionNames = new String[3]{"US", "RU", "CN"};
+        int faction = server.GetFaction(player.TeamId);
+        String teamName = "??";
+        if (faction >= 0 && faction <= 2) teamName = factionNames[faction];
         if (level >= 2 ) plugin.ConsoleWrite("^b[SQR]^n: new cadet for squad " + sqn + " on team " + teamName + ": " + recruit.FullName);
     }
     msg = "*** Insane Limits will attempt to move " + recruit.FullName + " to your squad on next death.";

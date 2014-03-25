@@ -2,9 +2,9 @@
 Create a new limit and set it Enabled. Set limit to evaluate OnDeath, set the name to Squad Recruiter, set the action to None.
 
 Set first_check to this Code: */
-/* Version: V0.8/R4 */
+/* Version: V9.16/R5 */
 
-if ( Regex.Match(server.Gamemode, "^(?:Conquest|Rush|Domination)", RegexOptions.IgnoreCase).Success ) {
+if ( Regex.Match(server.Gamemode, "^(?:Conquest|Rush)", RegexOptions.IgnoreCase).Success ) {
     bool initialDraftMode = true; // Change this to false to start with mode OFF
     
     int level = 2;
@@ -17,8 +17,8 @@ if ( Regex.Match(server.Gamemode, "^(?:Conquest|Rush|Domination)", RegexOptions.
     if (plugin.isInPlayerWhitelist(victim.Name)) return false;
 
     String prefix = "SQR_";
-    String kUSCadets = prefix + "US_cadets"; // server.RoundData
-    String kRUCadets = prefix + "RU_cadets"; // server.RoundData
+    String kUSCadets = prefix + "T1_cadets"; // server.RoundData
+    String kRUCadets = prefix + "T2_cadets"; // server.RoundData
     String kCooldown = prefix + "cooldown"; // server.RoundData
     String kDraft = prefix + "draft"; // plugin.Data
 
@@ -59,13 +59,13 @@ return false;
 
 /* Set second_check to this Code: */
 
-/* Version: V0.8/R4 */
+/* Version: V9.16/R5 */
 
 /* Find a squad to place this dead lone wolf in */
 
 String prefix = "SQR_";
-String kUSCadets = prefix + "US_cadets"; // server.RoundData
-String kRUCadets = prefix + "RU_cadets"; // server.RoundData
+String kT1Cadets = prefix + "T1_cadets"; // server.RoundData
+String kT2Cadets = prefix + "T2_cadets"; // server.RoundData
 String kDraft = prefix + "draft"; // plugin.Data
 String kCooldown = prefix + "cooldown"; // server.RoundData
 
@@ -89,7 +89,7 @@ if (isDraftEnabled && victim.SquadId == 0 && limit.Activations(victim.Name) == 1
     return false; // First death just gets a message
 }
 
-String kCadets = (victim.TeamId == 1) ? kUSCadets : kRUCadets;
+String kCadets = (victim.TeamId == 1) ? kT1Cadets : kT2Cadets;
 
 Dictionary<String,int> cadets = (Dictionary<String,int>)server.RoundData.getObject(kCadets);
 bool isCadet = cadets.ContainsKey(victim.Name);
@@ -106,21 +106,25 @@ if (!isDraftEnabled && !isCadet) return false; // Nothing to do
 int[] squads = new int[33]; // R20/Alpha - Hotel - 32 + the "no squad" (0)
 
 TeamInfoInterface team = (victim.TeamId == 1) ? team1 : team2;
-String teamName = (victim.TeamId == 1) ? "US" : "RU";
+String[] factionNames = new String[3]{"US", "RU", "CN"};
+String teamName = "??";
 
 foreach (PlayerInfoInterface p in team.players) {
     int ii = p.SquadId;
     squads[p.SquadId] += 1;
 }
 
+int targetTeam = victim.TeamId;
 int targetSquad = 0;
 
 if (isCadet) {
-    targetSquad = cadets[victim.Name];
-    if (squads[targetSquad] == 4) {
-        if (level >= 2) plugin.ConsoleWarn("^b[SQR]^n: squad " + targetSquad.ToString() + " on " + teamName + " is full: " + victim.FullName);
+    int teamSquad = cadets[victim.Name];
+    targetTeam = (teamSquad / 1000);
+    targetSquad = (teamSquad % 1000);
+    if (squads[targetSquad] == 5) {
+        if (level >= 2) plugin.ConsoleWarn("^b[SQR]^n: squad " + targetSquad.ToString() + " is full: " + victim.FullName);
         msg = "*** Can't move " + victim.FullName + "to your squad, it's full!";
-        plugin.SendSquadMessage(victim.TeamId, targetSquad, msg);
+        plugin.SendSquadMessage(targetTeam, targetSquad, msg);
         plugin.PRoConChat("ADMIN > " + msg);
         return false; // No squad available
     }
@@ -136,6 +140,9 @@ if (isCadet) {
     }
 }
 
+int faction = server.GetFaction(targetTeam);
+if (faction >= 0 && faction <= 2) teamName = factionNames[faction];
+
 if (targetSquad == 0) {
     if (level >= 2) plugin.ConsoleWarn("^b[SQR]^n: no squad found for: " + victim.FullName + " on " + teamName);
     return false; // No squad available
@@ -149,19 +156,21 @@ Attempt the move - this may fail for multiple reasons.
 We'll give it two tries and then give up by putting player in the cooldown pool
 */
 
-String[] squadName = new String[]{"None",
+String[] squadName = new String[] { "None",
       "Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel",
       "India", "Juliet", "Kilo", "Lima", "Mike", "November", "Oscar", "Papa",
       "Quebec", "Romeo", "Sierra", "Tango", "Uniform", "Victor", "Whiskey", "Xray",
-      "Yankee", "Zulu", "Haggard", "Sweetwater", "Preston", "Redford", "Faith", "Celeste"};
-String sqn = (targetSquad > 8) ? ("Squad-" + targetSquad) : squadName[targetSquad];
+      "Yankee", "Zulu", "Haggard", "Sweetwater", "Preston", "Redford", "Faith", "Celeste"
+    };
+String sqn = (targetSquad >= 0) ? squadName[targetSquad] : "?";
 
 if (level >= 2) plugin.ConsoleWrite("^b[SQR]^n: ^b^4MOVE^0^n " + victim.FullName + " to " + sqn + " on " + teamName);
-msg = "*** Insane Limits attempting to place " + victim.FullName + " in squad " + sqn + " on team " + teamName;
-plugin.SendTeamMessage(victim.TeamId, msg);
+msg = "*** Recruiting " + victim.FullName + " to " + sqn + " on " + teamName;
+plugin.SendTeamMessage(targetTeam, msg);
+if (victim.TeamId != targetTeam) plugin.SendPlayerMessage(victim.Name, msg);
 plugin.PRoConChat("ADMIN > " + msg);
 plugin.PRoConEvent(msg, "Insane Limits");
-plugin.ServerCommand("admin.movePlayer", victim.Name, victim.TeamId.ToString(), targetSquad.ToString(), "false");
+plugin.ServerCommand("admin.movePlayer", victim.Name, targetTeam.ToString(), targetSquad.ToString(), "false");
 
 /* Clean-up */
 
@@ -175,4 +184,4 @@ if (!isCooldown && limit.Activations(victim.Name) > 1) {
     if (level >= 3) plugin.ConsoleWrite("^b[SQR]^n: cool down " + victim.FullName);
     coolDown.Add(victim.Name);
 }
-return true;
+return false;
