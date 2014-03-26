@@ -4,7 +4,7 @@ Create a new limit and set it Enabled. Set limit to evaluate OnDeath, set the na
 Set first_check to this Code: */
 /* Version: V9.16/R5 */
 
-if ( Regex.Match(server.Gamemode, "^(?:Conquest|Rush)", RegexOptions.IgnoreCase).Success ) {
+if ( Regex.Match(server.Gamemode, "^(?:Conquest|Rush|Domination)", RegexOptions.IgnoreCase).Success ) {
     bool initialDraftMode = true; // Change this to false to start with mode OFF
     
     int level = 2;
