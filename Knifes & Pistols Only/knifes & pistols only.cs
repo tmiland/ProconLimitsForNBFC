@@ -1,7 +1,7 @@
 /* Set the limit to evaluate OnKill and set the Action to None.
 
 Set first_check to this Expression: */
-kill.Weapon == "U_M98B" || kill.Weapon == "U_M93R" || kill.Weapon == "U_GOL" || !Regex.Match(kill.Weapon, @"(U_Taurus44|U_HK45C|U_CZ75|U_FN57|U_M1911|U_M9|U_MP412Rex|U_MP443|U_P226|U_QSZ92|U_SW40|U_Flashbang|U_Defib|Melee|Suicide|SoldierCollision|DamageArea|Death)", RegexOptions.IgnoreCase).Success
+kill.Weapon == "U_M98B" || kill.Weapon == "U_M93R" || kill.Weapon == "U_GOL" || !Regex.Match(kill.Weapon, @"(U_Taurus44|U_HK45C|U_CZ75|U_FN57|U_M1911|U_M9|U_MP412Rex|U_MP443|U_P226|U_QSZ92|U_SW40|U_Flashbang|U_Defib|U_Medkit|Melee|Suicide|SoldierCollision|DamageArea|Death)", RegexOptions.IgnoreCase).Success
 /* 
 Set second_check to this Code: 
 */
