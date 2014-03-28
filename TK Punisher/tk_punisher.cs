@@ -12,6 +12,12 @@ if (Regex.Match(player.LastChat, @"^\s*[!@#](p$|p\s|punish)", RegexOptions.Ignor
     }
     DateTime last = (DateTime)player.RoundData.getObject(key);
     String tker = player.RoundData.getString(key);
+    if (last == DateTime.MaxValue) {
+        plugin.SendPlayerMessage(player.Name, tker + " apologized, punishment is not allowed"); // CHANGE
+        player.RoundData.unsetString(key);
+        player.RoundData.unsetObject(key);
+        return false;
+    }
     if (DateTime.Now.Subtract(last).TotalSeconds > timeToPunishSeconds) {
         plugin.SendPlayerMessage(player.Name, "More than " + timeToPunishSeconds + " seconds have past since the team kill, it's too late to punish");
         player.RoundData.unsetString(key);
