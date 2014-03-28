@@ -9,7 +9,7 @@ String kCounter = killer.Name + "_TreatAsOne_Count";
 TimeSpan time = TimeSpan.FromSeconds(3); // Activations within 3 seconds count as 1
 
 int warnings = 0;
-if (server.RoundData.issetInt(kCounter)) warnings = server.RoundData.getInt(kCounter);
+if (server.Data.issetInt(kCounter)) warnings = server.Data.getInt(kCounter);
     
 /*
 The first time through, warnings is zero. Whether this is an isolated
@@ -20,13 +20,13 @@ String msg = "none";
 if (warnings == 0) {
         msg = plugin.R("ATTENTION %k_n%! Do not use %w_n%! THIS IS KNIFES & PISTOLS ONLY!"); // First warning message
         plugin.ServerCommand("admin.say", msg, "player", killer.Name);
-        plugin.SendPlayerYell(killer.Name, msg, 10);
+        plugin.SendPlayerYell(killer.Name, msg, 20);
         plugin.PRoConChat("ADMIN > " + msg);
 		plugin.SendGlobalMessage(msg);
         plugin.KillPlayer(killer.Name, 3);
 		plugin.ConsoleWrite("^b^1ILLEGAL WEAPON!^0^n " + killer.FullName + " used " + kill.Weapon + " against " + victim.FullName);
 
-        server.RoundData.setInt(kCounter, warnings+1);
+        server.Data.setInt(kCounter, warnings+1);
         return false;
 }
 
@@ -45,7 +45,7 @@ We get here only if there was exactly one activation in the time span
 if (warnings == 1) {
         msg = plugin.R("FINAL WARNING %k_n%! Do not use %w_n%! Next Violation is a KICK!"); // Second warning message
         plugin.ServerCommand("admin.say", msg, "player", killer.Name);
-        plugin.SendPlayerYell(killer.Name, msg, 10);
+        plugin.SendPlayerYell(killer.Name, msg, 20);
         plugin.PRoConChat("ADMIN > " + msg);
         plugin.KillPlayer(killer.Name, 3);
 		plugin.ConsoleWrite("^b^1ILLEGAL WEAPON!^0^n " + killer.FullName + " used " + kill.Weapon + " against " + victim.FullName);
@@ -63,5 +63,5 @@ if (warnings == 1) {
         plugin.PRoConEvent(msg, "Insane Limits");
         plugin.EABanPlayerWithMessage(EABanType.Name, EABanDuration.Temporary, killer.Name, 30 /* minutes */, msg);
 }
-server.RoundData.setInt(kCounter, warnings+1);
+server.Data.setInt(kCounter, warnings+1);
 return false;
