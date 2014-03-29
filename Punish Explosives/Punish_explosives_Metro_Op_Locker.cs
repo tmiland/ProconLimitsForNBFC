@@ -3,8 +3,15 @@ BF4 for BOTH Locker and Metro 2014
 Set the limit to evaluate OnKill and set the Action to None.
 
 Set first_check to this Expression: */
-/*---------- With exeptions------------*/
+/*---------- With exeptions ------------
 (Regex.Match(server.MapFileName, @"(?:MP_Prison|XP0_Metro)", RegexOptions.IgnoreCase).Success && (Regex.Match(kill.Weapon, @"(AA Mine|M320|_LVG|_HE|_3GL|_AT4|_C4|_Claymore|_FGM148|_FIM92|_FLASH|_Flashbang|_GrenadeRGO|_M15|_M224|_M34|_M67|_MGL|_NLAW|_RPG7|_Sa18IGLA|_SLAM|_SMAW|_SRAW|_Starstreak|_Tomahawk|_UCAV|_V40|_XM25|ROADKILL|Death)", RegexOptions.IgnoreCase).Success && !Regex.Match(kill.Weapon, @"(_SMK|_Smoke|_Suicide|_SoldierCollision|_DamageArea)", RegexOptions.IgnoreCase).Success))
+/*---------- With Weapon Categories ----------*/
+(
+Regex.Match(server.MapFileName, @"(?:MP_Prison|XP0_Metro)", RegexOptions.IgnoreCase).Success && 
+	(
+		(Regex.Match(kill.Category, @"(Explosive|Impact)").Success || Regex.Match(kill.Weapon, @"(ROADKILL|Death)", RegexOptions.IgnoreCase).Success) && !(kill.Category == "Suicide")
+	)
+)
 /* Set second_check to this Code: */
 /* Version: V0.9.15/R1 */
 String kCounter = killer.Name + "_TreatAsOne_Count";
