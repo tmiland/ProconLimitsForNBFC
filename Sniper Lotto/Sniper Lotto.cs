@@ -4,8 +4,8 @@ Set first_check to this Code: */
 /* VERSION 0.9/R7 (BF4) */
 
 // CUSTOMIZE
-double maxMinutes = 5; // Number of minutes to collect players for the lottery
-int maxSnipers = 3; // Number of snipers per team to choose from the lottery
+double maxMinutes = 2; // Number of minutes to collect players for the lottery
+int maxSnipers = 5; // Number of snipers per team to choose from the lottery
 
 String msg = "test";
 
@@ -28,7 +28,7 @@ String key = kPrefix + killer.Name;
 int state = 0;
 if (plugin.RoundData.issetInt(kState)) state = plugin.RoundData.getInt(kState);
 
-bool sniperRifleUsed = (kill.Category == "SniperRifle");
+bool sniperRifleUsed = (kill.Category == "SniperRifle" || kill.Category == "DMR");
 
 // State 0: Waiting for first player to type the !sniper command
 if (state == 0) {

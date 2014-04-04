@@ -5,7 +5,7 @@ Create a limit to evaluate OnAnyChat, call it "Lotto Command". Set Action to Non
 Set first_check to this Code: */
 /* VERSION 0.9/R7 BF4 */
 // CUSTOMIZE
-double maxMinutes = 5; // Number of minutes to collect players for the lottery
+double maxMinutes = 2; // Number of minutes to collect players for the lottery
 
 String kWinners = "Lotto_Winners"; // plugin.RoundData String
 
