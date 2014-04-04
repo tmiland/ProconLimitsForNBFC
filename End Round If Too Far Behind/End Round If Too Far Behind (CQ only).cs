@@ -1,7 +1,9 @@
-/* Create a limit to evaluate OnIntervalServer. Set the interval to 30 seconds. Set the Action to None.
+/* End Round If Too Far Behind
+Create a limit to evaluate OnIntervalServer. Set the interval to 30 seconds. Set the Action to None.
 
 Set first_check to this Expression: */
-(!Regex.Match(server.Gamemode, @"(?:Squad|Gun)").Success)
+(!Regex.Match(server.Gamemode, @"(?:Squad|Gun)").Success && server.PlayerCount <= 32) //Less than 32 players on a 64 slot server.
+
 /* Set second_check to this Code: */
 /* Version 0.8/R7 */
 /* CUSTOMIZE: */
