@@ -7,7 +7,7 @@ first check code: */
 
 // Messages
 String msg = "WARNING: You will be AUTO-KICKED if you use the PROHIBITED Mobile-AA or GUNSHIP!";
-String yellMsg = @"WARNING: You will be AUTO-KICKED if you use the PROHIBITED Mobile-AA, AA-Mine or GUNSHIP!";
+String yellMsg = @"WARNING: You will be AUTO-KICKED if you use the PROHIBITED Mobile-AA or GUNSHIP!";
 String msg1 = "WARNING: You will be AUTO-KICKED if you use the PROHIBITED Mobile-AA or GUNSHIP!";
 String msg2 = "Please type @rules in chat to see the Server Rules.";
 

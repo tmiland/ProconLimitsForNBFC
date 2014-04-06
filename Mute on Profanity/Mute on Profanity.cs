@@ -14,6 +14,8 @@ Set first_check to this Code: */
 	bad_words.Add(@"g+[a4]+y+"); // Change This
 	// this matches jew, j3w, jeeeew, je3w, etc.
 	bad_words.Add(@"j+[e3]+w+"); // Change This
+	bad_words.Add(@"dick*"); // Change This
+	bad_words.Add(@"cock*"); // Change This
 
 	String[] chat_words = Regex.Split(player.LastChat, @"\s+");
 
