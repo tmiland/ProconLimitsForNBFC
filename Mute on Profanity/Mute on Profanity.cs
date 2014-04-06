@@ -2,7 +2,6 @@
 Set limit to evaluate OnAnyChat, set action to None
 
 Set first_check to this Code: */
-if (plugin.isInList(bad_words.Add, "badwords")) return false;
 	List<String> bad_words = new List<String>();
 	//bad_words.Add("BadWord"); // Change This
 	// this matches nigger, n1g3r, nig3, etc 
