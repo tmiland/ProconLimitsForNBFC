@@ -33,14 +33,16 @@ Set first_check to this Code: */
 	if (count == 1) {
 		msg = plugin.R("Please avoid using profanity, you will be muted for the rest of the round!");
 		plugin.SendPlayerYell(player.Name, msg, 20);
-		plugin.PRoConChat("ADMIN MUTE > " + player.FullName + msg);
+		plugin.SendGlobalMessage(msg);
+		plugin.PRoConChat("ADMIN MUTE > " + msg);
 		plugin.ConsoleWrite("^b^1ADMIN MUTE >^0^n " + player.FullName + " tripped the profanity filter! ");
 	}
 	else if (count == 2) {
 		msg = plugin.R("/@mute " + player.Name + " You have been muted for using profanity in chat!");
 		plugin.ServerCommand("admin.say", msg);
 		plugin.SendPlayerYell(player.Name, msg, 20);
-		plugin.PRoConChat("ADMIN MUTE > " + player.FullName + msg);
+		plugin.SendGlobalMessage(msg);
+		plugin.PRoConChat("ADMIN MUTE > " + msg);
 		plugin.ConsoleWrite("^b^1ADMIN MUTE >^0^n " + player.FullName + " has been muted for profanity! ");
 	}
 
