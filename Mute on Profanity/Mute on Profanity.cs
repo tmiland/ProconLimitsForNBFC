@@ -10,6 +10,10 @@ Set first_check to this Code: */
 	bad_words.Add(@"f+[a4]+g+[ao0]+t*"); // Change This
 	// this matches fag, f4g, fagggg, fa4g, etc.
 	bad_words.Add(@"f+[a4]+g+"); // Change This
+	// this matches gay, g4y, gayyyy, ga4y, etc.
+	bad_words.Add(@"g+[a4]+y+"); // Change This
+	// this matches jew, j3w, jeeeew, je3w, etc.
+	bad_words.Add(@"j+[e3]+w+"); // Change This
 
 	String[] chat_words = Regex.Split(player.LastChat, @"\s+");
 
