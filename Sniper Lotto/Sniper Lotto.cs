@@ -4,7 +4,7 @@ Set first_check to this Code: */
 /* VERSION 0.9/R7 (BF4) */
 
 // CUSTOMIZE
-double maxMinutes = 2; // Number of minutes to collect players for the lottery
+double maxMinutes = 5; // Number of minutes to collect players for the lottery
 int maxSnipers = 5; // Number of snipers per team to choose from the lottery
 
 String msg = "test";
