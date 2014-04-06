@@ -120,6 +120,13 @@ if (state == 2) {
         plugin.KillPlayer(killer.Name, 5);
         return false;    
     }
+	    if (!sniperRifleUsed && plugin.RoundData.issetBool(key)) {
+        msg = killer.Name + ": You entered and won the lottery, you MUST use sniper rifles this round!";
+        ChatPlayer(killer.Name);
+        plugin.KillPlayer(killer.Name, 5);
+        // plugin.KickPlayerWithMessage(killer.Name, "You entered and won the lottery, you MUST use sniper rifles!");
+        return false;    
+    }
 }
 
 return false;

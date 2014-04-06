@@ -2,6 +2,7 @@
 Set limit to evaluate OnAnyChat, set action to None
 
 Set first_check to this Code: */
+
 	List<String> bad_words = new List<String>();
 	//bad_words.Add("BadWord"); // Change This
 	// this matches nigger, n1g3r, nig3, etc 
@@ -31,7 +32,7 @@ Set first_check to this Code: */
 	double count = limit.Activations(player.Name);
 	String msg = "none";
 	if (count == 1) {
-		msg = plugin.R("Please avoid using profanity, you will be muted for the rest of the round!");
+		msg = plugin.R("ATTENTION %k_n%! Please avoid using profanity, you will be muted for the rest of the round!");
 		plugin.SendPlayerYell(player.Name, msg, 20);
 		plugin.SendGlobalMessage(msg);
 		plugin.PRoConChat("ADMIN MUTE > " + msg);
