@@ -1,4 +1,4 @@
-/* Mute on Profanity - 
+/* Mute on Profanity - https://forum.myrcon.com/showthread.php?7737-Insane-Limits-Mute-on-Profanity
 Set limit to evaluate OnAnyChat, set action to None
 
 Set first_check to this Code: */
