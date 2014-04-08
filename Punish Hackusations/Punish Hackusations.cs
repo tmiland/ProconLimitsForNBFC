@@ -32,12 +32,12 @@ List<String> bad_words = new List<String>();
 List<String> shame = new List<String>();
 shame.Add("%p_n%, hackusations are not welcome on this server!");
 shame.Add("%p_n% must have been killed, go cry hackusations to mommy!");
-shame.Add("%p_n% go report the hacker on battlelog, dont spam my chat with hackusations."); 
-shame.Add("Would you like some cheese with your whine about hacking, %p_n%?"); 
+shame.Add("%p_n% go report the hacker on battlelog, dont spam our chat with hackusations.");
+shame.Add("Would you like some cheese with your whine about hacking, %p_n%?");
 shame.Add("%p_n%, maybe if you played better everyone wouldn't seem like a hack?");
-shame.Add("%p_n%, surrounded by hacks who can't possibly play better than you ... really?"); 
-shame.Add("%p_n%, don't go away mad, just go away."); 
-shame.Add("%p_n%, u mad, bro?"); 
+shame.Add("%p_n%, surrounded by hacks who can't possibly play better than you ... really?");
+shame.Add("%p_n%, don't go away mad, just go away.");
+shame.Add("%p_n%, u mad, bro?");
 // Add additional messages here with shame.Add("...");
 
 int level = 2;
