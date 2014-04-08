@@ -9,6 +9,9 @@ Set first_check to this Code: */
 	{
 		if (plugin.isInList(chat_word, "bad_words_list")) {
 			return true;
+		} else
+		if (plugin.isInList(chat_word, "bad_words_list_no")) {
+			return true;
 		}
 	}
 	return false;
