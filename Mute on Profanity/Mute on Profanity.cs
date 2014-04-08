@@ -9,10 +9,17 @@ Set first_check to this Code: */
 	{
 		if (plugin.isInList(chat_word, "bad_words_list")) {
 			return true;
+		} else
+		if (plugin.isInList(chat_word, "bad_words_list_no")) {
+			return true;
+		} else
+		if (plugin.isInList(chat_word, "bad_words_list_es")) {
+			return true;
 		}
 	}
 	return false;
 
+	//&& plugin.isInList(chat_word, "bad_words_list_no") && plugin.isInList(chat_word, "bad_words_list_es")
 	/* Set second_check to this Code: */
 
 	string fancy_time = DateTime.Now.ToString("HH:mm:ss");
@@ -25,7 +32,7 @@ Set first_check to this Code: */
 		plugin.SendGlobalMessage(msg);
 		plugin.PRoConChat("ADMIN MUTE > " + msg);
 		plugin.ConsoleWrite("^b^1ADMIN MUTE >^0^n " + player.FullName + " tripped the profanity filter! ");
-		plugin.Log("Logs/InsaneLimits_bad_words_"+ player.Name +".log", plugin.R("[" + fancy_date + "][" + fancy_time + "] %p_n% said: [" + player.LastChat + "]"));
+		plugin.Log("Logs/BadWords/InsaneLimits_bad_words.log", plugin.R("[" + fancy_date + "][" + fancy_time + "] %p_n% said: [" + player.LastChat + "]"));
 	}
 	else if (count == 2) {
 		msg = plugin.R("/@mute " + player.Name + " You have been muted for using profanity in chat!");
@@ -34,7 +41,7 @@ Set first_check to this Code: */
 		plugin.SendGlobalMessage(msg);
 		plugin.PRoConChat("ADMIN MUTE > " + msg);
 		plugin.ConsoleWrite("^b^1ADMIN MUTE >^0^n " + player.FullName + " has been muted for profanity! ");
-		plugin.Log("Logs/InsaneLimits_bad_words_"+ player.Name +".log", plugin.R("[" + fancy_date + "][" + fancy_time + "] %p_n% said: [" + player.LastChat + "]"));
+		plugin.Log("Logs/BadWords/InsaneLimits_bad_words.log", plugin.R("[" + fancy_date + "][" + fancy_time + "] %p_n% said: [" + player.LastChat + "]"));
 	}
 
 	return false;
