@@ -1,13 +1,15 @@
-/* Mute on Insults - https://forum.myrcon.com/showthread.php?7737-Insane-Limits-Mute-on-insults
+/* Mute on Insults
 Set limit to evaluate OnAnyChat, set action to None
 
 Set first_check to this Code: */
 
-List<String> insults = new List<String>();
+	List<String> insults = new List<String>();
 	// Matching you/she/he/we/they/it suck/sucks
 	insults.Add(@"/((yo)?u|s?he|we|they|it) sucks?/i");
 	// Matching fuck you/her/him/them/it
 	insults.Add(@"/fuck ((yo)?u|h(er|im)|them|it)/i");
+	
+	insults.Add(@"/you ((f)?uck(ing)) [a-zA-Z]+/i");
     
 	String[] chat_words = Regex.Split(player.LastChat, @"\s+");
     
