@@ -22,8 +22,11 @@ int kickCount = 3; // you can change this number
 String warningMessage = "Vehicle kills will be punished until there are more than " + minimumPlayers + " players!"; 
 String kickMessage = "ignored warnings about no vehicle kills";
 
-// Code
-if (!Regex.Match(kill.Weapon, @"(Death|RoadKill)", RegexOptions.IgnoreCase).Success) return false;
+bool isVehicle = Regex.Match(kill.Weapon, @"(VehicleLight|VehicleHeavy|VehicleAir|VehicleWater)").Success;
+
+/* CODE */
+
+if (!isVehicle) return false;
 if (killer.Name == victim.Name) return false;
 if (killer.Name == "Server") return false;
 if (server.PlayerCount > minimumPlayers) return false;
