@@ -7,7 +7,8 @@ Set first_check to this Code: */
 
 	foreach(string chat_word in chat_words)
 	{
-		if (plugin.isInList(chat_word, "bad_words_list")) {
+		if (plugin.isInList(chat_word, "bad_words_list")) 
+		{
 			return true;
 		}
 	}

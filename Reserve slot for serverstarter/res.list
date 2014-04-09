@@ -1,0 +1,6 @@
+/*
+Set list_1_name to Res
+Set list_1_comparison to CaseSensitive
+list_1_data is to contain a list of clan tags or soldier names that should be excluded from this reward, separated by commas, for example:
+*/
+NBFC, TommyMiland

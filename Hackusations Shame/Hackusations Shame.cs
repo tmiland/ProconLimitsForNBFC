@@ -2,33 +2,27 @@
 
 Set first_check to this Code: */
 
-List<String> bad_words = new List<String>();
+List<String> hackusations = new List<String>();
+	// Matching hack, hacker, hacking, hacks, wallhack
+	hackusations.Add(@"\b(wall)?hack(er|ing|ed|s)?\b");
+	// Matching cheat, cheater, cheating, cheats
+	hackusations.Add(@"\bcheat(er|ing|ed|s)?\b");
+	// Matching exploit, exploiter, exploiting, exploits
+	hackusations.Add(@"\bexploit(er|ing|ed|s)?\b");
+	// Matching glitch, glitcher, glitching
+	hackusations.Add(@"\bglitch(er|ing|ed)?\b");
     
-    bad_words.Add("hack");
-    bad_words.Add("hacker");
-    bad_words.Add("hacking");
-    bad_words.Add("cheat");
-    bad_words.Add("cheater");
-    bad_words.Add("cheating");
-    bad_words.Add("exploit");
-    bad_words.Add("exploiter");
-    bad_words.Add("exploiting");
-    bad_words.Add("glitch");
-    bad_words.Add("glitcher");
-    bad_words.Add("glitching");
+	String[] chat_words = Regex.Split(player.LastChat, @"[\s!\?\.]+");
     
-    String[] chat_words = Regex.Split(player.LastChat, @"[\s!\?\.]+");
-    
-    foreach(String chat_word in chat_words)
-        foreach(String bad_word in bad_words)
-            if (Regex.Match(chat_word, "^"+bad_word+"$", RegexOptions.IgnoreCase).Success)
-                return true;
-            
-    return false;
+	foreach(String chat_word in chat_words)
+		foreach(String bad_word in hackusations)
+			if (Regex.Match(chat_word, "^"+bad_word+"$", RegexOptions.IgnoreCase).Success)
+				return true;
+
+	return false;
 	
 /* Set second check to this code: */
 
-/* Version: V0.8/R1 */
 List<String> shame = new List<String>();
 shame.Add("%p_n%, hackusations are not welcome on this server!");
 shame.Add("%p_n% must have been killed, go cry hackusations to mommy!");
