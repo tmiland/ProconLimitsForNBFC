@@ -77,7 +77,7 @@ For each players first noticeCount spawns, this limit will announce that vehicle
 
 The value of minimumPlayers MUST be the same in both limits. If you change the code above, you must also change this code.
 
-Create a new limit OnSpawn, call it "Spawn Notice", leave Action set to None.
+Create a new limit OnSpawn, call it "Low Pop Spawn Notice", leave Action set to None.
 
 In the code that follows, these variables define how the limit works -- think of these like settings, but you have to change the code to change them:
 
