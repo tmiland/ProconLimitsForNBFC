@@ -4,10 +4,10 @@ Set limit to evaluate OnAnyChat, set action to None
 Set first_check to this Code: */
 
 List<String> hackusations = new List<String>();
-	// Matching hack, hacker, hacking, hacks, wallhack
-	hackusations.Add(@"\b(wall)?hack(er|ing|ed|s)?\b");
+	// Matching hack, hacker, haxor, hacking, hacks, wallhack
+	hackusations.Add(@"\b(wall)?ha(ck|xo)(er|ing|ed|s|r)?\b");
 	// Matching cheat, cheater, cheating, cheats
-	hackusations.Add(@"\bcheat(er|ing|ed|s)?\b");
+	hackusations.Add(@"\bche(at)(er|ing|ed|s)(s)?\b");
 	// Matching exploit, exploiter, exploiting, exploits
 	hackusations.Add(@"\bexploit(er|ing|ed|s)?\b");
 	// Matching glitch, glitcher, glitching
@@ -18,7 +18,8 @@ List<String> hackusations = new List<String>();
 	foreach(String chat_word in chat_words)
 	{	foreach(String hackusation in hackusations)
 		{	if (Regex.Match(chat_word, "^"+hackusation+"$", RegexOptions.IgnoreCase).Success)
-			{	return true;
+			{	
+				return true;
 			}
 		}
 	}
