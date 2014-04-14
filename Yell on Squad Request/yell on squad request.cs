@@ -4,6 +4,8 @@ Set limit to evaluate OnAnyChat, set action to None
 
 Set first_check to this Code:*/
 
+string msg = "none";
+
 if (!player.LastChat.StartsWith("ID_CHAT_"))
     return false;
 
@@ -60,16 +62,45 @@ if (!player.LastChat.StartsWith("ID_CHAT_"))
 		case "ID_CHAT_NEGATIVE":
 		{
 			msg = player.Name + " denied REQUEST!";
-			break;
-		}
+		}	break;
 
         plugin.ConsoleWrite("Unknown commo rose chat code: " + player.LastChat);
         return false;
 	}
-		
+	// We need a list for notification
+List<PlayerInfoInterface> callersTeam = new List<PlayerInfoInterface>();
+
+// Get a list of players on caller's team
+	switch (player.TeamId)
+	{
+		case 1:
+		{
+			callersTeam.AddRange(team1.players);
+		}	break;
+		case 2:
+		{
+			callersTeam.AddRange(team2.players);
+		}	break;
+		case 3:
+		{
+			callersTeam.AddRange(team3.players);
+		}	break;
+		case 4:
+		{	callersTeam.AddRange(team4.players);
+			break;
+		}
+	}
+	// Send the message only to the players in the same squad
+	foreach (PlayerInfoInterface p in callersTeam)
+	{
+		if ((p.Name != player.Name) && (p.SquadId == player.SquadId))
+		{
+			plugin.SendPlayerYell(p.Name, msg, 5);
+		}
+	}
 	plugin.SendSquadMessage(player.TeamId, player.SquadId, msg);
-	plugin.SendServerCommand("admin.yell", msg, 5, "squad", player.TeamId.ToString(), player.SquadId.ToString());
+	//plugin.ServerCommand("admin.yell", msg, 5, "squad", player.TeamId.ToString(), player.SquadId.ToString());
 	plugin.PRoConEvent(msg, "Insane Limits");
-	plugin.PRoConChat("^b^1ADMIN ORDERS >^0^n " + msg);
+	plugin.ConsoleWrite("^b^1ADMIN ORDERS >^0^n " + msg);
 
 	return false;
