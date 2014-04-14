@@ -1,4 +1,4 @@
-/* Yell to Squad on Request
+/* Yell to Squad Members on Request
 
 Set limit to evaluate OnAnyChat, set action to None
 
