@@ -63,7 +63,7 @@ if (!player.LastChat.StartsWith("ID_CHAT_"))
 		{
 			msg = player.Name + " denied REQUEST!";
 		}	break;
-
+        default:
         plugin.ConsoleWrite("Unknown commo rose chat code: " + player.LastChat);
         return false;
 	}
@@ -98,9 +98,12 @@ List<PlayerInfoInterface> callersTeam = new List<PlayerInfoInterface>();
 			plugin.SendPlayerYell(p.Name, msg, 5);
 		}
 	}
+	// Send msg to squad chat in addition to Yell
 	plugin.SendSquadMessage(player.TeamId, player.SquadId, msg);
-	//plugin.ServerCommand("admin.yell", msg, 5, "squad", player.TeamId.ToString(), player.SquadId.ToString());
-	plugin.PRoConEvent(msg, "Insane Limits");
+	// For writing to console
 	plugin.ConsoleWrite("^b^1ADMIN ORDERS >^0^n " + msg);
+	// For writing to chat
+	//plugin.PRoConChat("^b^1ADMIN ORDERS >^0^n " + msg);
+	plugin.PRoConEvent(msg, "Insane Limits");
 
 	return false;
