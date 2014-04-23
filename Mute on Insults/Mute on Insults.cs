@@ -3,18 +3,18 @@ Set limit to evaluate OnAnyChat, set action to None
 
 Set first_check to this Code: */
 
-	List<String> insults = new List<String>();
+	List<string> insults = new List<string>();
 	// Matching you/she/he/we/they/it suck/sucks
-	insults.Add(@"/((yo)?u|s?he|we|they|it) sucks?/i");
+	insults.Add(@"\b((yo)?u|s?he|we|they|it) sucks?\b");
 	// Matching fuck you/her/him/them/it
-	insults.Add(@"/fuck ((yo)?u|h(er|im)|them|it)/i");
+	insults.Add(@"\bfuck ((yo)?u|h(er|im)|them|it)\b");
 	
-	insults.Add(@"/you ((f)?uck(ing)) [a-zA-Z]+/i");
+	insults.Add(@"\byou ((f)?uck(ing)) [a-zA-Z]+\b");
     
-	String[] chat_words = Regex.Split(player.LastChat, @"\s+");
+	string[] chat_words = Regex.Split(player.LastChat, @"\s+");
     
-	foreach(String chat_word in chat_words)
-	{	foreach(String insult in insults)
+	foreach(string chat_word in chat_words)
+	{	foreach(string insult in insults)
 		{	if (Regex.Match(chat_word, "^"+insult+"$", RegexOptions.IgnoreCase).Success)
 			{	
 				return true;
@@ -28,7 +28,7 @@ Set first_check to this Code: */
 	string fancy_time = DateTime.Now.ToString("HH:mm:ss");
 	string fancy_date = DateTime.Now.ToString("dd-MM-yyyy");
 	double count = limit.Activations(player.Name);
-	String msg = "none";
+	string msg = "none";
 
 	if (count == 1) {
 		msg = plugin.R("ATTENTION %k_n%! Please avoid insults, you will be muted for the rest of the round!");
