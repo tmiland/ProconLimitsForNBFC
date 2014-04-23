@@ -2,7 +2,10 @@
 ServiceStars On KillCam
 OnDeath
 Code: */
-/* Just display the service stars on killcam */
+if (!player.Data.issetBool("NoYell"))
+	player.Data.setBool("NoYell", true);
+
+if (player.Data.getBool("NoYell")) {
 	if (killer.Name != null) {
 		BattlelogWeaponStatsInterface WeaponStats = killer.GetBattlelog(kill.Weapon);			
 		if (WeaponStats != null) {
@@ -14,4 +17,9 @@ Code: */
 			}
 		}
 	}
+}
+else {
 	return false;
+}
+
+return false;
