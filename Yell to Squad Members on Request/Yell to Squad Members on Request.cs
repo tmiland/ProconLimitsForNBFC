@@ -90,6 +90,10 @@ List<PlayerInfoInterface> callersTeam = new List<PlayerInfoInterface>();
 			break;
 		}
 	}
+	if (!player.Data.issetBool("NoYell"))
+	{
+		player.Data.setBool("NoYell", true);
+	}
 	// Send the message only to the players in the same squad
 	foreach (PlayerInfoInterface p in callersTeam)
 	{
@@ -98,8 +102,11 @@ List<PlayerInfoInterface> callersTeam = new List<PlayerInfoInterface>();
 			plugin.SendPlayerYell(p.Name, msg, 5);
 		}
 	}
-	// Send msg to squad chat in addition to Yell
-	plugin.SendSquadMessage(player.TeamId, player.SquadId, msg);
+	if (player.Data.getBool("NoYell"))
+	{
+		// Send msg to squad chat if @noyell is off
+		plugin.SendSquadMessage(player.TeamId, player.SquadId, msg);
+	}
 	// For writing to console
 	plugin.ConsoleWrite("^b^1ADMIN ORDERS >^0^n " + msg);
 	// For writing to chat
