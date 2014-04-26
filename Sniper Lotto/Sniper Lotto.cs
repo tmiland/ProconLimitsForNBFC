@@ -121,26 +121,18 @@ if (state == 1) {
 			plugin.KillPlayer(killer.Name, 5);
 			return false;    
 		}
-		String kCounter = killer.Name + "_TreatAsOne_Count";
-		TimeSpan time = TimeSpan.FromSeconds(3); // Activations within 3 seconds count as 1
-
+		String kCounter = killer.Name + "_LottoKillCount";
 		int warnings = 0;
-		if (server.Data.issetInt(kCounter)) warnings = server.Data.getInt(kCounter);
+		if (server.RoundData.issetInt(kCounter)) warnings = server.RoundData.getInt(kCounter);
 
 		if (!sniperRifleUsed && plugin.RoundData.issetBool(key)) {
 			if (warnings == 0) {
 				msg = killer.Name + ": FIRST WARNING: You entered and won the lottery, you MUST use sniper rifles this round!";
 				ChatPlayer(killer.Name);
-				server.Data.setInt(kCounter, warnings+1);
-				return false;
-			}
-			if (limit.Activations(killer.Name, time) > 1) return false;
-			if (warnings == 1) {
+			} else if (warnings == 1) {
 					msg = plugin.R("FINAL WARNING %k_n%! You entered and won the lottery, you MUST use sniper rifles this round!"); // Second warning message
-					plugin.ServerCommand("admin.say", msg, "player", killer.Name);
+					ChatPlayer(killer.Name);
 					plugin.SendPlayerYell(killer.Name, msg, 20);
-					plugin.PRoConChat("ADMIN > " + msg);
-					plugin.ConsoleWrite("^b^1ILLEGAL WEAPON!^0^n " + killer.FullName + " used " + kill.Weapon + " against " + victim.FullName);
 					plugin.KillPlayer(killer.Name, 3);
 			} else if (warnings == 2) {
 					msg = plugin.R("Kicking %k_n% for ignoring warnings and killing with %w_n%!");
@@ -155,7 +147,7 @@ if (state == 1) {
 					plugin.PRoConEvent(msg, "Insane Limits");
 					plugin.EABanPlayerWithMessage(EABanType.Name, EABanDuration.Temporary, killer.Name, 30 /* minutes */, msg);
 			}
-			server.Data.setInt(kCounter, warnings+1);
+			server.RoundData.setInt(kCounter, warnings+1);
 			return false;
 		}
 	}
