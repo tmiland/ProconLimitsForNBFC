@@ -1,7 +1,7 @@
 /* NoYell Notices
 OnSpawn
 first check code: */
-String msg = "Turn On/Off the squad yell spam with @noyell in chat! Default is on!";
+String msg = "Turn On/Off the squad spam & Service stars on killcam with @noyell in chat! Default is on!";
 // Times
 int yellTime = 5; // seconds
 int secondNoticeSpawnCount = 5;
