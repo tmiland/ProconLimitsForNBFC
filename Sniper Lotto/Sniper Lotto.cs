@@ -29,7 +29,7 @@ int state = 0;
 if (plugin.RoundData.issetInt(kState)) state = plugin.RoundData.getInt(kState);
 
 bool sniperRifleUsed = (kill.Category == "SniperRifle" || kill.Category == "DMR");
-if (kill.Category == "Handgun" || kill.Category == "Explosive" || kill.Category == "Melee" || kill.Category == "Vehicle" || kill.Category == "Suicide" || kill.Category == "None") return false;
+if (kill.Category == "Handgun" || kill.Category == "Explosive" || kill.Category == "Melee" || kill.Category == "Vehicle" || kill.Category == "Suicide" || kill.Category == "None" || kill.Weapon == "U_MGL") return false;
 
 // State 0: Waiting for first player to type the !sniper command
 if (state == 0) {
