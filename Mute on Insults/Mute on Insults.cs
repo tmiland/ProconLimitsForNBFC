@@ -5,11 +5,12 @@ Set first_check to this Code: */
 
 	List<string> insults = new List<string>();
 	// Matching you/she/he/we/they/it suck/sucks
-	insults.Add(@"\b((yo)?u|s?he|we|they|it) sucks?\b");
+	insults.Add(@"((yo)?u|s?he|we|they|it) sucks?");
+	insults.Add(@"((yo)?u) (suck|stink|mother?)(fuck(er))(s?)");
 	// Matching fuck you/her/him/them/it
-	insults.Add(@"\bfuck ((yo)?u|h(er|im)|them|it)\b");
-	
-	insults.Add(@"\byou ((f)?uck(ing)) [a-zA-Z]+\b");
+	insults.Add(@"fuck ((yo)?u|h(er|im)|them|it)");
+	// Matching you fucking
+	insults.Add(@"you ((f)?uck(ing)) [a-zA-Z]+");
     
 	string[] chat_words = Regex.Split(player.LastChat, @"\s+");
     
