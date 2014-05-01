@@ -2,7 +2,7 @@
 Set limit to evaluate OnIntervalServer, EvaluationInterval: 3600, set action to None
 
 Set first_check to this Expression: */
-server.TimeUp > 21600 && server.PlayerCount == 0
+(DateTime.Now.Hour == 6) && server.PlayerCount == 0
 
 /* Set second_check to this Code: */
 plugin.ServerCommand("admin.shutDown");
