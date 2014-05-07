@@ -1,3 +1,6 @@
+/* Set limit to evaluate OnIntervalServer, EvaluationInterval: 60, set action to None
+
+Set first_check to this Code: */
 int threshold = 32;
 int idleTimeout = 300;
 
