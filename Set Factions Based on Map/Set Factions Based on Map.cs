@@ -1,4 +1,4 @@
-/* Create a new limit to evaluate OnRoundOver, call it "Set Factions Based on Next Map", leave Action set to None.
+/* Create a new limit to evaluate OnRoundOver, call it "Set Factions Based on Map", leave Action set to None.
 
 Set first_check to this Code: */
 /*
@@ -29,13 +29,20 @@ switch (server.MapFileName)
 	case "MP_Siege":
 	case "MP_Damage":
 	case "MP_Journey":
+	case "MP_TheDish":	
 		Team1 = 1;
 		Team2 = 0;
 		break;
+	case "MP_Prison":
+	case "MP_Flooded":
+		Team1 = 2;
+		Team2 = 1;
+		break;
+	case "MP_Abandoned":
 	case "MP_Naval":
 	case "MP_Resort":
 		Team1 = 2;
-		Team2 = 1;
+		Team2 = 0;
 		break;
 	default:
 		Random rnd = new Random();
