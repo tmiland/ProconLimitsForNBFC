@@ -17,14 +17,14 @@ if (plugin.isInList(player.Name, "admins")) return false;
 if (player.Ping > maximumPing) plugin.ServerCommand("player.ping", player.Name);
 
 if (player.MedianPing > maximumPing) {
-    int count = 0;
-    if (player.Data.issetInt(key)) count = player.Data.getInt(key);
-    count = count + 1;
-    player.Data.setInt(key, count);
-    if (count > maximumCount) {
+	int count = 0;
+	if (player.Data.issetInt(key)) count = player.Data.getInt(key);
+	count = count + 1;
+	player.Data.setInt(key, count);
+	if (count > maximumCount) {
 		msg = "[Ping Kicker] > %p_n% has been KICKED for high ping.";
-        plugin.KickPlayerWithMessage(player.Name, plugin.R("Sorry, but your ping was too high."));
-        plugin.PRoConChat(plugin.R(msg));
+		plugin.KickPlayerWithMessage(player.Name, plugin.R("Sorry, but your ping was too high."));
+		plugin.PRoConChat(plugin.R(msg));
 		plugin.ServerCommand("admin.say", msg);
     }
 }
