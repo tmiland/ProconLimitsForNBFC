@@ -5,7 +5,7 @@ Set first_check to this Code: */
 double timeToPunishSeconds = 60; // victim has 60 seconds to punish team killer
 String key = "Last_TK";
 
-if (Regex.Match(player.LastChat, @"^\s*[!@#](p$|p\s|punish)", RegexOptions.IgnoreCase).Success) {
+if (Regex.Match(player.LastChat, @"^\s*[!@#](p$|p\s|pun|punish)", RegexOptions.IgnoreCase).Success) {
     if (!player.RoundData.issetObject(key) || !player.RoundData.issetString(key)) {
         plugin.SendPlayerMessage(player.Name, "There is no team-killer to punish!");
         return false;
