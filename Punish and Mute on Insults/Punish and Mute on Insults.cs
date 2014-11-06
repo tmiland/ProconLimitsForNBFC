@@ -31,6 +31,8 @@ Set first_check to this Code: */
 	insults.Add(@"c[u]+[n]+[t]");
 	// cunt written with spaces
 	insults.Add(@"\bc\W*([u]\W*)+([n]\W*)+[t]\b");
+	
+	
         
 	foreach(string insult in insults)
 	{	
