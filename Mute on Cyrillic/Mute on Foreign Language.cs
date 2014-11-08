@@ -5,7 +5,7 @@ Set first_check to this Code: */
 
 	String[] chat_words = Regex.Split(player.LastChat, @" ");
 
-	foreach(string chat_word in chat_words)
+	foreach(String chat_word in chat_words)
 	{
 	if (String.IsNullOrEmpty(chat_word))
 		{

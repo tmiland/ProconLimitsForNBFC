@@ -12,7 +12,7 @@ Set first_check to this Code: */
 	// Matching you fucking
 	insults.Add(@"you f+[u|ck]*ing [a-zA-Z]+");
 	// Matching fucking and any word after
-	insults.Add(@"f+[u|ck]*ing [a-zA-Z]+");
+	//insults.Add(@"f+[u|ck]*ing [a-zA-Z]+");
 	// Matching you fucking with spaces
 	insults.Add(@"you f\W*([uc]\W*)+\W*([k]\W*)+\W*([i]\W*)+\W*([n]\W*)+\W*([g]\W*)");
 	// # fag contained in a word
@@ -21,18 +21,26 @@ Set first_check to this Code: */
 	insults.Add(@"\bf\W*([a4]\W*)+[gq&]\b");
 	//# variations like "fgt" or "fegit"
 	insults.Add(@"\bf[a4e3]*g+[a4o0ile3]*t(?<!fget)\b");
-	
 	// # gay contained in a word
 	insults.Add(@"g[a4]+[y]");
 	//# written with spaces
 	insults.Add(@"\bg\W*([a4]\W*)+[y]\b");
-	
 	// cunt contained in a word
 	insults.Add(@"c[u]+[n]+[t]");
 	// cunt written with spaces
 	insults.Add(@"\bc\W*([u]\W*)+([n]\W*)+[t]\b");
-	
-	
+	// kuk contained in a word
+	insults.Add(@"k[u]+[k]");
+	// kuk written with spaces
+	insults.Add(@"\bc\W*([u]\W*)+([n]\W*)+[t]\b");
+	// dick contained in a word
+	insults.Add(@"d[i]+[c]+[k]");
+	// dick written with spaces
+	insults.Add(@"\bd\W*([i]\W*)+([c]\W*)+[k]\b");
+	// cock contained in a word
+	insults.Add(@"c[o]+[c]+[k]");
+	// cock written with spaces
+	insults.Add(@"\bc\W*([o]\W*)+([c]\W*)+[k]\b");
         
 	foreach(string insult in insults)
 	{	
