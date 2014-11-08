@@ -11,6 +11,8 @@ Set first_check to this Code: */
 	insults.Add(@"fuck ((yo)?u|h(er|im)|them|it)");
 	// Matching you fucking
 	insults.Add(@"you f+[u|ck]*ing [a-zA-Z]+");
+	/* Matching you **** fuck */
+	insults.Add(@"you [a-zA-Z]+ f+[u]ck");
 	// Matching fucking and any word after
 	//insults.Add(@"f+[u|ck]*ing [a-zA-Z]+");
 	// Matching you fucking with spaces
@@ -59,7 +61,7 @@ Set first_check to this Code: */
 	String msg = "none";
 
 	if (count == 1) {
-		msg = plugin.R("/@punish " + player.Name + " You have been Punished for insults in chat!");
+		msg = plugin.R("/@punish " + player.Name + " insults in chat!");
 		plugin.ServerCommand("admin.say", msg);
 		plugin.SendPlayerYell(player.Name, msg, 20);
 		plugin.SendGlobalMessage(msg);
@@ -68,7 +70,7 @@ Set first_check to this Code: */
 		plugin.Log("Logs/InsaneLimits_insults.log", plugin.R("[" + fancy_date + "][" + fancy_time + "] %p_n% said: [" + player.LastChat + "]"));
 	}
 		else if (count == 2) {
-		msg = plugin.R("/@mute " + player.Name + " You have been Muted for insults in chat!");
+		msg = plugin.R("/@mute " + player.Name + " insults in chat!");
 		plugin.ServerCommand("admin.say", msg);
 		plugin.SendPlayerYell(player.Name, msg, 20);
 		plugin.SendGlobalMessage(msg);
