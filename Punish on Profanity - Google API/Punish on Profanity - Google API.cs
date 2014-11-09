@@ -1,23 +1,17 @@
 	/* 	
-		Warn, Punish and Mute on Bad Language - Google API Check for bad words
+		Punish on Profanity - Google API
 		Set limit to evaluate OnAnyChat, set action to None
 
 		Set first_check to this Code:
 	*/
 
-    // Exception list
-    List<String> good = new List<String>();
-    good.Add("boob");
-    good.Add("tit");
-	good.Add("fuck");
-    // add more here, use all lowercase letters
-
+    // Exception list is "good_words"
     // Split chat line into words
     String[] words = player.LastChat.Trim().Split(new Char[]{' ','\t'});
     StringBuilder edited = new StringBuilder();
     // Remove exception list words from line
     foreach (String w in words) {
-        if (good.Contains(w.ToLower())) {
+        if (plugin.isInList(w, "good_words")) {
             continue;
         }
         edited.Append(w);
@@ -74,15 +68,6 @@
 		plugin.SendGlobalMessage(msg);
 		plugin.PRoConChat("ADMIN PUNISH > " + msg);
 		plugin.ConsoleWrite("^b^1ADMIN PUNISH >^0^n " + player.FullName + " using Bad Language in chat! ");
-		plugin.Log("Logs/InsaneLimits_bad_words_api.log", plugin.R("[" + fancy_date + "][" + fancy_time + "] %p_n% said: [" + player.LastChat + "]"));
-	}
-		else if (count == 3) {
-		msg = plugin.R("/@mute " + player.Name + " using Bad Language in chat!");
-		plugin.ServerCommand("admin.say", msg);
-		plugin.SendPlayerYell(player.Name, msg, 20);
-		plugin.SendGlobalMessage(msg);
-		plugin.PRoConChat("ADMIN MUTE > " + msg);
-		plugin.ConsoleWrite("^b^1ADMIN MUTE >^0^n " + player.FullName + " using Bad Language in chat! ");
 		plugin.Log("Logs/InsaneLimits_bad_words_api.log", plugin.R("[" + fancy_date + "][" + fancy_time + "] %p_n% said: [" + player.LastChat + "]"));
 	}
 
