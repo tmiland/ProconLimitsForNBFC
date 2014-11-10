@@ -7,7 +7,7 @@
 
     // Exception list is "good_words"
     // Split chat line into words
-    String[] words = player.LastChat.Trim().Split(new Char[]{' ','\t'});
+    String[] words = player.LastChat.Trim().Split(new Char[]{' ','\t',',','.',':','!','?',';','(',')',']','[','"'});
     StringBuilder edited = new StringBuilder();
     // Remove exception list words from line
     foreach (String w in words) {
