@@ -12,15 +12,22 @@ List<String> hackusations = new List<String>();
 	hackusations.Add(@"\bexploit(er|ing|ed|s)?\b");
 	// Matching glitch, glitcher, glitching
 	hackusations.Add(@"\bglitch(er|ing|ed)?\b");
-    
-	String[] chat_words = Regex.Split(player.LastChat, @"\s+");
-    
-	foreach(String chat_word in chat_words)
-	{	foreach(String hackusation in hackusations)
-		{	if (Regex.Match(chat_word, "^"+hackusation+"$", RegexOptions.IgnoreCase).Success)
-			{	
-				return true;
-			}
+	// Matching aimbot
+	hackusations.Add(@"\baimbot?\b");
+	// Matching reported
+	hackusations.Add(@"\breported?\b");
+
+	Match report = Regex.Match(player.LastChat, @"^\s*!report\s+(.*)$", RegexOptions.IgnoreCase);
+	
+	foreach(String hackusation in hackusations)
+	{	
+		if (report.Success)
+		{
+			return false;
+		}
+		else if (Regex.Match(player.LastChat, "^"+hackusation+"$", RegexOptions.IgnoreCase).Success)
+		{	
+			return true;
 		}
 	}
 	return false;
@@ -40,7 +47,7 @@ List<String> hackusations = new List<String>();
 		ChatPlayer(player.Name);
 		plugin.PRoConChat("ADMIN MUTE > " + msg);
 	}
-	if (count == 2) {
+	else if (count == 2) {
 		msg = plugin.R("ATTENTION %k_n%! Please avoid Hackusations, you will be muted for the rest of the round!");
 		plugin.SendPlayerYell(player.Name, msg, 20);
 		plugin.SendGlobalMessage(msg);
