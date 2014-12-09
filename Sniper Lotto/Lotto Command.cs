@@ -39,7 +39,7 @@ if (!plugin.RoundData.issetInt(kState)) {
 // Got another entrant!
 
 if (state == 0) {
-    msg = "The sniper rifle lottery will run for " + maxMinutes + " minutes. Type !sniper to enter!";
+    msg = "The sniper/DMR rifle lottery will run for " + maxMinutes + " minutes. Type !sniper to enter!";
     plugin.SendGlobalMessage(msg);
     plugin.ServerCommand("admin.yell", msg, "8");
     plugin.ConsoleWrite("^b[Lotto]^n " + msg);
@@ -55,7 +55,7 @@ if (state == 2) {
 
 // Otherwise, we are State 1: running the lotto and taking names
 
-msg = "You already entered the sniper rifle lottery!";
+msg = "You already entered the sniper rifle/DMR lottery!";
 
 if (player.TeamId == 1) {
     List<String> entrants1 = null;
@@ -67,7 +67,7 @@ if (player.TeamId == 1) {
     }
         if (!entrants1.Contains(player.Name)) {
         entrants1.Add(player.Name);
-        msg = "You are the #" + entrants1.Count + " entrant in the sniper rifle lottery!";
+        msg = "You are the #" + entrants1.Count + " entrant in the sniper/DMR rifle lottery!";
         }
 } else if (player.TeamId == 2) {
     List<String> entrants2 = null;
@@ -79,7 +79,7 @@ if (player.TeamId == 1) {
     }
         if (!entrants2.Contains(player.Name)) {
         entrants2.Add(player.Name);
-        msg = "You are the #" + entrants2.Count + " entrant in the sniper rifle lottery!";
+        msg = "You are the #" + entrants2.Count + " entrant in the sniper/DMR rifle lottery!";
         }
 }
 

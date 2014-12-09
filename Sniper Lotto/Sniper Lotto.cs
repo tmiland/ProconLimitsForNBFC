@@ -5,7 +5,7 @@ Set first_check to this Code: */
 
 // CUSTOMIZE
 double maxMinutes = 5; // Number of minutes to collect players for the lottery
-int maxSnipers = 3; // Number of snipers per team to choose from the lottery
+int maxSnipers = 5; // Number of snipers per team to choose from the lottery
 
 String msg = "test";
 
@@ -28,14 +28,20 @@ String key = kPrefix + killer.Name;
 int state = 0;
 if (plugin.RoundData.issetInt(kState)) state = plugin.RoundData.getInt(kState);
 
-//bool sniperRifleUsed = (kill.Category == "SniperRifle");
-bool sniperRifleUsed = (kill.Category == "SniperRifle") && !Regex.Match(kill.Weapon, @"(U_AMR2|U_AMR2_CQB|U_AMR2_MED|U_M82A3|U_M82A3_CQB|U_M82A3_MED)").Success;
+bool sniperRifleUsed = (kill.Category == "SniperRifle" || kill.Category == "DMR") && !Regex.Match(kill.Weapon, @"(U_AMR2|U_AMR2_CQB|U_AMR2_MED|U_M82A3|U_M82A3_CQB|U_M82A3_MED)").Success;
+
+if (kill.Category == "Handgun" || kill.Category == "Explosive" || kill.Weapon == "Melee")
+	return false;
+
+List<String> ReservervedSlots = plugin.GetReservedSlotsList();
+if (!ReservervedSlots.Contains(killer.Name))
+	return false;
 
 // State 0: Waiting for first player to type the !sniper command
 if (state == 0) {
     if (!sniperRifleUsed) return false;
     // Punish and remind
-    msg = "No sniping until after lottery: type !sniper to enter the lottery";
+    msg = "No sniper or DMR until after lottery: type !sniper to enter the lottery";
     ChatPlayer(killer.Name); // Remind player
     plugin.KillPlayer(killer.Name, 5);
     plugin.ServerCommand("admin.yell", msg, "8"); // Remind everyone
@@ -55,7 +61,7 @@ if (state == 1) {
     if (since.TotalMinutes < maxMinutes) {
         if (!sniperRifleUsed) return false;
         // Punish and remind
-        msg = "No sniping until after lottery: type !sniper to enter the lottery";
+        msg = "No sniper or DMR until after lottery: type !sniper to enter the lottery";
         ChatPlayer(killer.Name); // Remind player
         plugin.KillPlayer(killer.Name, 5);
         plugin.ServerCommand("admin.yell", msg, "8"); // Remind everyone
@@ -80,7 +86,7 @@ if (state == 1) {
     Random rnd = new Random();
     int pick = maxSnipers;
     // Team 1
-    msg = ": may use sniper rifles this round!";
+    msg = ": may use sniper rifles or DMR this round!";
     while (pick > 0 && entrants1.Count > 0) {
         int winner = (entrants1.Count > 2) ? rnd.Next(entrants1.Count) : 0;
         String name = entrants1[winner];
@@ -113,14 +119,43 @@ if (state == 1) {
     return false;
 }
 
-// State 2: Lottery is over, only winners may use sniper rifles
-if (state == 2) {
-    if (sniperRifleUsed && !plugin.RoundData.issetBool(key)) {
-        msg = killer.Name + ": You are not allowed to use sniper rifles this round!";
-        ChatPlayer(killer.Name);
-        plugin.KillPlayer(killer.Name, 5);
-        return false;    
-    }
-}
+	// State 2: Lottery is over, only winners may use sniper rifles
+	if (state == 2) {
+		if (sniperRifleUsed && !plugin.RoundData.issetBool(key)) {
+			msg = killer.Name + ": You are not allowed to use sniper rifles this round!";
+			ChatPlayer(killer.Name);
+			plugin.KillPlayer(killer.Name, 5);
+			return false;    
+		}
+		String kCounter = killer.Name + "_LottoKillCount";
+		int warnings = 0;
+		if (server.RoundData.issetInt(kCounter)) warnings = server.RoundData.getInt(kCounter);
+
+		if (!sniperRifleUsed && plugin.RoundData.issetBool(key)) {
+			if (warnings == 0) {
+				msg = killer.Name + ": FIRST WARNING: You entered and won the lottery, you MUST use sniper rifles this round!";
+				ChatPlayer(killer.Name);
+			} else if (warnings == 1) {
+					msg = plugin.R("FINAL WARNING %k_n%! You entered and won the lottery, you MUST use sniper rifles this round!"); // Second warning message
+					ChatPlayer(killer.Name);
+					plugin.SendPlayerYell(killer.Name, msg, 20);
+					plugin.KillPlayer(killer.Name, 3);
+			} else if (warnings == 2) {
+					msg = plugin.R("Kicking %k_n% for ignoring warnings and killing with %w_n%!");
+					plugin.SendGlobalMessage(msg);
+					plugin.PRoConChat("ADMIN > " + msg);
+					plugin.PRoConEvent(msg, "Insane Limits");
+					plugin.KickPlayerWithMessage(killer.Name, msg);
+			} else if (warnings > 2) {
+					msg = plugin.R("TBANNING %k_n% for 30mins. Still not using SNIPER RIFLES after being kicked!");
+					plugin.SendGlobalMessage(msg);
+					plugin.PRoConChat("ADMIN > " + msg);
+					plugin.PRoConEvent(msg, "Insane Limits");
+					plugin.EABanPlayerWithMessage(EABanType.Name, EABanDuration.Temporary, killer.Name, 30 /* minutes */, msg);
+			}
+			server.RoundData.setInt(kCounter, warnings+1);
+			return false;
+		}
+	}
 
 return false;

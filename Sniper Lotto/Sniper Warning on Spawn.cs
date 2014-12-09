@@ -4,10 +4,10 @@ code: */
 /* SETUP */
 
 // Messages
-String msg = "WARNING: ONLY 5 SNIPERS PER TEAM! Type !sniper to join the lottery!";
-String yellMsg = @"WARNING: ONLY 5 SNIPERS PER TEAM! Type !sniper to join the lottery!";
-String msg1 = "WARNING: ONLY 5 SNIPERS PER TEAM! Type !sniper to join the lottery!";
-String msg2 = "Please type @rules in chat to see the Server Rules.";
+String msg = "WARNING: ONLY 5 SNIPERS/DMR PER TEAM! Type !sniper to join the lottery, or buy a reserved slot!";
+String yellMsg = @"WARNING: ONLY 5 SNIPERS/DMR PER TEAM! Type !sniper to join the lottery, or buy a reserved slot!";
+String msg1 = "WARNING: ONLY 5 SNIPERS/DMR PER TEAM! Type !sniper to join the lottery, or buy a reserved slot!";
+String msg2 = "Please register @ nbfc.no to buy your reserved slot! Only 30,- NOK per month!";
 
 // Times
 int yellTime = 20; // seconds
