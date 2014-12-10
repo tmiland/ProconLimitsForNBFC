@@ -23,7 +23,7 @@ Teams.Add(0, "US");
 Teams.Add(1, "RU");
 Teams.Add(2, "CN");
 
-switch (server.MapFileName)
+switch (server.NextMapFileName)
 {
 	case "MP_Tremors":
 	case "MP_Siege":
@@ -58,7 +58,7 @@ switch (server.MapFileName)
 
 plugin.ServerCommand("vars.teamFactionOverride", "1", Convert.ToString(Team1));
 plugin.ServerCommand("vars.teamFactionOverride", "2", Convert.ToString(Team2));
-msg = "Current map is: " + plugin.FriendlyMapName(server.MapFileName) + ", Setting factions to " + Teams[Team1] + " vs " + Teams[Team2] + " this round...";
+msg = "Setting factions to " + Teams[Team1] + " vs " + Teams[Team2] + " on next round...";
 
 plugin.SendGlobalMessage(msg, 12);
 plugin.ConsoleWrite("^b^1ADMIN FACTIONS >^0^n " + msg);
