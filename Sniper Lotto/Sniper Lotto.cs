@@ -28,7 +28,7 @@ String key = kPrefix + killer.Name;
 int state = 0;
 if (plugin.RoundData.issetInt(kState)) state = plugin.RoundData.getInt(kState);
 
-bool sniperRifleUsed = (kill.Category == "SniperRifle" || kill.Category == "DMR") && !Regex.Match(kill.Weapon, @"(U_AMR2|U_AMR2_CQB|U_AMR2_MED|U_M82A3|U_M82A3_CQB|U_M82A3_MED)").Success;
+bool sniperRifleUsed = (kill.Category == "SniperRifle" || kill.Category == "DMR") && !Regex.Match(kill.Weapon, @"(AMR2_|M82A3_)").Success;
 
 if (kill.Category == "Handgun" || kill.Category == "Explosive" || kill.Weapon == "Melee")
 	return false;
