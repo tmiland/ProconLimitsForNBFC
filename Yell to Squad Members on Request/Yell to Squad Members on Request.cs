@@ -13,55 +13,55 @@ if (!player.LastChat.StartsWith("ID_CHAT_"))
 	{
 		case "ID_CHAT_ATTACK/DEFEND":
 		{
-			msg = player.Name + " Gave you an ORDER! Follow up!";
+			msg = player.Name + " Attack/Defend!";
 		}	break;
 		case "ID_CHAT_THANKS":
 		{
-			msg = player.Name + " says: THANK YOU!";
+			msg = player.Name + " Thanks!";
 		}	break;
 		case "ID_CHAT_SORRY":
 		{
-			msg = player.Name + " says: SORRY!";
+			msg = player.Name + " Sorry!";
 		}	break;
 		case "ID_CHAT_GOGOGO":
 		{
-			msg = player.Name + " said Let's Go!";
+			msg = player.Name + " Go! Go! Go!";
 		}	break;
 		case "ID_CHAT_REQUEST_ORDER":
 		{
-			msg = player.Name + " requested ORDERS!";
+			msg = player.Name + " Request orders!";
 		}	break;
 		case "ID_CHAT_REQUEST_MEDIC":
 		{
-			msg = player.Name + " requested a MEDIC!";
+			msg = player.Name + " Request medic!";
 		}	break;
 		case "ID_CHAT_REQUEST_AMMO":
 		{
-			msg = player.Name + " requested AMMO!";
+			msg = player.Name + " Request ammo!";
 		}	break;
 		case "ID_CHAT_REQUEST_RIDE":
 		{
-			msg = player.Name + " requested a RIDE!";
+			msg = player.Name + " Request ride!";
 		}	break;
 		case "ID_CHAT_GET_OUT":
 		{
-			msg = player.Name + " requested a SPOT!";
+			msg = player.Name + " Get out!";
 		}	break;
 		case "ID_CHAT_GET_IN":
 		{
-			msg = player.Name + " has a free SPOT!";
+			msg = player.Name + " Get in!";
 		}	break;
 		case "ID_CHAT_REQUEST_REPAIRS":
 		{
-			msg = player.Name + " requested REPAIRS!";
+			msg = player.Name + " Request repairs!";
 		}	break;
 		case "ID_CHAT_AFFIRMATIVE":
 		{
-			msg = player.Name + " accepted REQUEST!";
+			msg = player.Name + " Affirmative!";
 		}	break;
 		case "ID_CHAT_NEGATIVE":
 		{
-			msg = player.Name + " denied REQUEST!";
+			msg = player.Name + " Negative!";
 		}	break;
         default:
         plugin.ConsoleWrite("Unknown commo rose chat code: " + player.LastChat);
