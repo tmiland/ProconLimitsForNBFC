@@ -9,59 +9,59 @@ string msg = "none";
 if (!player.LastChat.StartsWith("ID_CHAT_"))
     return false;
 
-	switch (player.LastChat)
+switch (player.LastChat)
 	{
 		case "ID_CHAT_ATTACK/DEFEND":
 		{
-			msg = player.Name + " Attack/Defend!";
+			msg = player.Name + " Gave you an ORDER Soldier! PTFO!";
 		}	break;
 		case "ID_CHAT_THANKS":
 		{
-			msg = player.Name + " Thanks!";
+			msg = player.Name + " says: THANK YOU!";
 		}	break;
 		case "ID_CHAT_SORRY":
 		{
-			msg = player.Name + " Sorry!";
+			msg = player.Name + " says: SORRY!";
 		}	break;
 		case "ID_CHAT_GOGOGO":
 		{
-			msg = player.Name + " Go! Go! Go!";
+			msg = player.Name + " said: Let's Go!";
 		}	break;
 		case "ID_CHAT_REQUEST_ORDER":
 		{
-			msg = player.Name + " Request orders!";
+			msg = player.Name + ": What are the objective Squad Leader?";
 		}	break;
 		case "ID_CHAT_REQUEST_MEDIC":
 		{
-			msg = player.Name + " Request medic!";
+			msg = player.Name + " requested a MEDIC! Throw out a bag!";
 		}	break;
 		case "ID_CHAT_REQUEST_AMMO":
 		{
-			msg = player.Name + " Request ammo!";
+			msg = player.Name + " requested AMMO! Throw out a bag!";
 		}	break;
 		case "ID_CHAT_REQUEST_RIDE":
 		{
-			msg = player.Name + " Request ride!";
+			msg = player.Name + " requested a RIDE! Go pick him up!";
 		}	break;
 		case "ID_CHAT_GET_OUT":
 		{
-			msg = player.Name + " Get out!";
+			msg = player.Name + " requested a SPOT! Get out of the vehicle!";
 		}	break;
 		case "ID_CHAT_GET_IN":
 		{
-			msg = player.Name + " Get in!";
+			msg = player.Name + " has a free SPOT! Get in the vehicle!";
 		}	break;
 		case "ID_CHAT_REQUEST_REPAIRS":
 		{
-			msg = player.Name + " Request repairs!";
+			msg = player.Name + " requested REPAIRS! Now! Go! Go! Go!";
 		}	break;
 		case "ID_CHAT_AFFIRMATIVE":
 		{
-			msg = player.Name + " Affirmative!";
+			msg = player.Name + ": Affirmative!";
 		}	break;
 		case "ID_CHAT_NEGATIVE":
 		{
-			msg = player.Name + " Negative!";
+			msg = player.Name + " NO! I cannot do that!";
 		}	break;
         default:
         plugin.ConsoleWrite("Unknown commo rose chat code: " + player.LastChat);
