@@ -2,8 +2,8 @@
 Create a limit to evaluate OnRoundStart, leave Action set to None: */
 
 /* Version 0.9.15/R1 */
-String SquadLeader = "PlayerName"; // change this to the squad leader
-String Commander = "CommanderName"; // change this to commander
+String SquadLeader = "TommyMiland"; // change this to the squad leader
+String Commander = "TheRubberDuck"; // change this to commander
 
 // If already on the same team, do nothing:
 PlayerInfoInterface sl = plugin.GetPlayer(SquadLeader, false);

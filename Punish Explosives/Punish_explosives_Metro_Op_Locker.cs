@@ -61,7 +61,7 @@ if (warnings == 1) {
         plugin.PRoConChat("ADMIN > " + msg);
         plugin.PRoConEvent(msg, "Insane Limits");
         plugin.KickPlayerWithMessage(killer.Name, msg);
-} else if (warnings > 2) {
+} else if (warnings > 3) {
         msg = plugin.R("TBANNING %k_n% for 30mins. Still using EXPLOSIVES after being kicked!");
         plugin.SendGlobalMessage(msg);
         plugin.PRoConChat("ADMIN > " + msg);

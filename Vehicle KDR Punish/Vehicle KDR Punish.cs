@@ -11,6 +11,7 @@ String kPrefix = "VWhore_"; // plugin.Data int
 	String key = kPrefix + player.Name;
 	String msg = "none";
 	if (plugin.Data.issetInt(key)) warnings = plugin.Data.getInt(key);
+	
 	if (warnings <= 3) {
 		// First warning
 		msg = "Your vehicle kill rate is too high, READ THE !RULES!"; // CUSTOMIZE
