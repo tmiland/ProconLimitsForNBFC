@@ -1,7 +1,8 @@
 /* Create a new limit to evaluate OnIntervalServer, 300, call it "Random Server Name".
 
 Set first_check to this Code: */
-string prefix = "[NBFC #1] 24/7 CQ | All Maps | ";
+string modeName = plugin.FriendlyModeName(server.NextGamemode);
+string prefix = "[NBFC #1] 24/7 " + modeName + " | All Maps | ";
 List<String> name = new List<String>();
 	name.Add(prefix + "Noob Friendly");
 	name.Add(prefix + "DICE Friends");
