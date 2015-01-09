@@ -124,7 +124,8 @@ if (slName == null)
 	MessageType5.Add(@": What's the ORDERS, " + slName + "?");
 	MessageType5.Add(@": What are your ORDERS, " + slName + "?");
 	MessageType5.Add(@": Tell me what to do, " + slName + "?");
-	MessageType5.Add(@": I'm a noob! You tell me what do, " + slName + "!");
+	MessageType5.Add(@": I'm a noob! You tell me what to do, " + slName + "!");
+	MessageType5.Add(@": I want to PTFO! You tell me what to do, " + slName + "!");
 // Add all your messages which should be shown on "ID_CHAT_REQUEST_MEDIC" request
 MessageType6.Add(@" requested a MEDIC! Throw out a bag!");
 MessageType6.Add(@" Is DYING! Give him some MEDICINE");
