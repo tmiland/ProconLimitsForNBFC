@@ -1,7 +1,3 @@
-/* https://forum.myrcon.com/showthread.php?7617-Insane-Limits-Mobile-Anti-Air-and-AA-Mine-Limit
-Prohibit Gunship
-OnKill
-first check code */
 /* Version 9.16/R4 */
 /* SETUP */
 
@@ -14,21 +10,21 @@ String tempBan = "{0} TEMP BAN 1 HOUR for using the PROHIBITED {1}";
 String yellKilled = "The {1} is prohibited. You will be AUTO-KICKED if you use it again.";
 
 // Times
-int yellTime = 15; // seconds
+int yellTime = 25; // seconds
 int banTime = 60; // minutes
 double multiKillTime = 5; // seconds
 
 // Weapon/vehicle codes
 
-bool isGunship = Regex.Match(kill.Weapon, @"(AC130_Gunship)").Success;
+bool isAircraft = Regex.Match(kill.Weapon, @"(CH_FJET_J-20|F35B|RU_FJET_T-50_Pak_FA|CH_JET_Q5_FANTAN|A10_THUNDERBOLT)").Success;
 
 /* CODE */
 
-if (!isGunship) return false;
+if (!isAircraft) return false;
 
-String prohibited = "Gunship";
+String prohibited = "Aircraft";
 
-String key = "PersistGunship_" + prohibited + "_" + killer.Name;
+String key = "PersistAircraft_" + prohibited + "_" + killer.Name;
 
 int count = 0;
 if (plugin.Data.issetInt(key)) count = plugin.Data.getInt(key);

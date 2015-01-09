@@ -141,8 +141,8 @@ Set first_check to this Code:
 //###########################
 /* R4 */
 bool isSelf = true;
-Match selfie = Regex.Match(player.LastChat, @"^\s*[@!]lead/i");
-Match other = Regex.Match(player.LastChat, @"^\s*[@!]lead\s+([^\s]+)/i");
+Match selfie = Regex.Match(player.LastChat, @"^\s*[@!]lead");
+Match other = Regex.Match(player.LastChat, @"^\s*[@!]lead\s+([^\s]+)");
 PlayerInfoInterface target = null;
 if (other.Success) {
     List<PlayerInfoInterface> all = new List<PlayerInfoInterface>();

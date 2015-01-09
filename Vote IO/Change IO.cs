@@ -6,14 +6,12 @@ Set first_check to this Code: */
 String kVoteResult = "voteinfantry_result"; // plugin.Data bool
 String kState = "voteinfantry_state"; // plugin.Data int
 String kNextMap = "voteinfantry_map"; // plugin.Data String
-String kNextMode = "voteinfatnry_mode"; // plugin.Data String
+String kNextMode = "voteinfantry_mode"; // plugin.Data String
 String kCurrRound = "voteinfantry_round"; // plugin.Data int
 
 double minTicketPercent = 5.0;
 
 int level = 2;
-
-String mapName = plugin.FriendlyMapName(server.NextMapFileName);
 
 try {
 	level = Convert.ToInt32(plugin.getPluginVarValue("debug_level"));
@@ -34,8 +32,8 @@ switch (state) {
 				nextState = 1;
 				if (level >= 3) plugin.ConsoleWrite("^b[Change IO]^n successful vote detected!");
 				// Remember the next map/mode and current round number
-				plugin.Data.setString(kNextMap, mapName);
-				plugin.Data.setString(kNextMode, mapName);
+				plugin.Data.setString(kNextMap, server.NextMapFileName);
+				plugin.Data.setString(kNextMode, server.NextMapFileName);
 				plugin.Data.setInt(kCurrRound, server.CurrentRound);
 			}
 		plugin.Data.unsetBool(kVoteResult);
@@ -50,13 +48,14 @@ switch (state) {
 			if (level >= 3) plugin.ConsoleWrite("^b[Change IO]^n round change detected!");
 			nextState = 2;
 			// Remember the next map/mode and current round number
-			plugin.Data.setString(kNextMap, mapName);
-			plugin.Data.setString(kNextMode, mapName);
+			plugin.Data.setString(kNextMap, server.NextMapFileName);
+			plugin.Data.setString(kNextMode, server.NextMapFileName);
 			plugin.Data.setInt(kCurrRound, server.CurrentRound);
 		}
 		if (headStart || roundChanged) {
 			// CUSTOMIZE
 			plugin.ServerCommand("vars.preset", "INFANTRY", "true");
+			server.Data.setString("RememberPreset", "INFANTRY"); // where 'preset' is the string value of the preset, i.e., "Normal" or "Infantry".
 			if (level >= 3) plugin.ConsoleWrite("^b[Change IO]^n setting preset to IO!");
 		}
 		break;
@@ -70,8 +69,8 @@ switch (state) {
 				nextState = 1;
 				if (level >= 3) plugin.ConsoleWrite("^b[Change IO]^n another successful vote detected!");
 				// Remember the next map/mode and current round number
-				plugin.Data.setString(kNextMap, mapName);
-				plugin.Data.setString(kNextMode, mapName);
+				plugin.Data.setString(kNextMap, server.NextMapFileName);
+				plugin.Data.setString(kNextMode, server.NextMapFileName);
 				plugin.Data.setInt(kCurrRound, server.CurrentRound);
 				headStartRevert = false;
 				skip = true;
@@ -92,6 +91,7 @@ switch (state) {
 			if (headStartRevert || roundRevert) {
 				// CUSTOMIZE
 				plugin.ServerCommand("vars.preset", "NORMAL", "true");
+				server.Data.setString("RememberPreset", "NORMAL"); // where 'preset' is the string value of the preset, i.e., "Normal" or "Infantry".
 				if (level >= 3) plugin.ConsoleWrite("^b[Change IO]^n setting preset to NORMAL!");
 			}
 		}

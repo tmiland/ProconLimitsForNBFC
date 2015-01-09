@@ -7,8 +7,8 @@ Set first_check to this Expression: */
 /* Set second_check to this Code: */
 
 /* VERSION 0.8/R1 - vote io */
-double percent = 50; // CUSTOMIZE: percent of players needed to vote
-double timeout = 10.0; // CUSTOMIZE: number of minutes before vote times out
+double percent = 10; // CUSTOMIZE: percent of players needed to vote
+double timeout = 20.0; // CUSTOMIZE: number of minutes before vote times out
 int minPlayers = 16; // CUSTOMIZE: minimum players to enable vote
 double minTicketPercent = 20; // CUSTOMIZE: minimum ticket percentage remaining in the round
 
@@ -135,54 +135,8 @@ if (remain > 0) {
 server.RoundData.setBool(kVoteResult, false);
 plugin.Data.setBool(kVoteResult, true); // Signal the other limit to change to io
 
-/* BF4 friendly map names, including China Rising, Second Assault, Naval Strike, Dragons Teeth and Final Stand */
-Dictionary<String, String> Maps = new Dictionary<String, String>();
-Maps.Add("MP_Abandoned", "Zavod 311");
-Maps.Add("MP_Damage", "Lancang Dam");
-Maps.Add("MP_Flooded", "Flood Zone");
-Maps.Add("MP_Journey", "Golmud Railway");
-Maps.Add("MP_Naval", "Paracel Storm");
-Maps.Add("MP_Prison", "Operation Locker");
-Maps.Add("MP_Resort", "Hainan Resort");
-Maps.Add("MP_Siege", "Siege of Shanghai");
-Maps.Add("MP_TheDish", "Rogue Transmission");
-Maps.Add("MP_Tremors", "Dawnbreaker");
-// XP1 (China Rising)
-Maps.Add("XP1_001", "Silk Road");
-Maps.Add("XP1_002", "Altai Range");
-Maps.Add("XP1_003", "Guilin Peaks");
-Maps.Add("XP1_004", "Dragon Pass");
-// XP0 (Second Assault)
-Maps.Add("XP0_Caspian", "Caspian Border 2014");
-Maps.Add("XP0_Firestorm", "Operation Firestorm 2014");
-Maps.Add("XP0_Metro", "Operation Metro 2014");
-Maps.Add("XP0_Oman", "Gulf of Oman 2014");
-// XP2 (Naval Strike)
-Maps.Add("XP2_001", "Lost Islands");
-Maps.Add("XP2_002", "Nansha Strike");
-Maps.Add("XP2_003", "Wavebreaker");
-Maps.Add("XP2_004", "Operation Mortar");
-// XP3 (Dragons Teeth)
-Maps.Add("XP3_MarketPl", "Pearl Market");
-Maps.Add("XP3_Prpganda", "Propaganda");
-Maps.Add("XP3_UrbanGdn", "Lumphini Garden");
-Maps.Add("XP3_WtrFront", "Sunken Dragon");
-// XP4 (Final Stand)
-Maps.Add("XP4_Arctic", "Operation Whiteout");
-Maps.Add("XP4_SubBase", "Hammerhead");
-Maps.Add("XP4_Titan", "Hangar 21");
-Maps.Add("XP4_WlkrFtry", "Giants Of Karelia");
-
-/* BF4 friendly game modes */
-Dictionary<String, String> Modes = new Dictionary<String, String>();    
-Modes.Add("ConquestLarge0", "Conquest Large");
-Modes.Add("ConquestSmall0", "Conquest Small");
-Modes.Add("RushLarge0", "Rush");
-Modes.Add("SquAddeathMatch0", "Squad Deathmatch");
-Modes.Add("TeamDeathMatch0", "Team Deathmatch");
-
-String mapName = (Maps.ContainsKey(server.NextMapFileName)) ? Maps[server.NextMapFileName] : server.NextMapFileName;
-String modeName = (Modes.ContainsKey(server.NextGamemode)) ? Modes[server.NextGamemode] : server.NextGamemode;
+String mapName = plugin.FriendlyMapName(server.NextMapFileName);
+String modeName = plugin.FriendlyModeName(server.NextGamemode);
 
 msg = "Vote completed! Next round (" + mapName + "/" + modeName + ") will be infantry only!";
 plugin.SendGlobalMessage(msg);

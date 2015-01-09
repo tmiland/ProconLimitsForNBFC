@@ -8,7 +8,7 @@ Set second_check to this code: */
 if (limit.Activations() > 1) return false; // Only send yell once
 
 String msg = "Type !votecamp to initiate a vote to NUKE the ATTACKING team!"; // CHANGE
-plugin.SendGlobalYell(msg, 10);
+plugin.SendGlobalYell(msg, 15);
 plugin.SendGlobalMessage(msg);
 plugin.PRoConChat("ADMIN > " + msg);
 return false;
