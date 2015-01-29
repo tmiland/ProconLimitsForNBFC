@@ -44,7 +44,7 @@
 	String fancy_date = DateTime.Now.ToString("dd-MM-yyyy");
 	double count = limit.Activations(player.Name);
 	String msg = "none";
-	if (count == 1) {
+	if (count == 2) {
 		msg = plugin.R("ATTENTION %k_n%! Write in ENGLISH/SCANDINAVIAN in chat!");
 		plugin.SendPlayerYell(player.Name, msg, 20);
 		plugin.SendGlobalMessage(msg);
@@ -52,7 +52,7 @@
 		plugin.ConsoleWrite("^b^1ADMIN >^0^n " + player.FullName + " tripped the Foreign Language filter! ");
 		plugin.Log("Logs/InsaneLimits_foreign_language_api.log", plugin.R("[" + fancy_date + "][" + fancy_time + "] %p_n% said: [" + player.LastChat + "]"));
 	}
-	if (count == 2) {
+	if (count == 3) {
 		msg = plugin.R("ATTENTION %k_n%! ENGLISH/SCANDINAVIAN ONLY IN CHAT!");
 		plugin.SendPlayerYell(player.Name, msg, 20);
 		plugin.SendGlobalMessage(msg);
@@ -60,7 +60,7 @@
 		plugin.ConsoleWrite("^b^1ADMIN >^0^n " + player.FullName + " tripped the Foreign Language filter! ");
 		plugin.Log("Logs/InsaneLimits_foreign_language_api.log", plugin.R("[" + fancy_date + "][" + fancy_time + "] %p_n% said: [" + player.LastChat + "]"));
 	}
-	else if (count == 3) {
+	else if (count == 4) {
 		msg = plugin.R("/@mute " + player.Name + " not writing in ENGLISH/SCANDINAVIAN in chat!");
 		plugin.ServerCommand("admin.say", msg);
 		plugin.SendPlayerYell(player.Name, msg, 20);

@@ -1,10 +1,10 @@
 /* NoYell Notices
 OnSpawn
 first check code: */
-String msg = "Turn On/Off the squad spam & Service stars on killcam with @noyell in chat! Default is on!";
+String msg = "Turn On/Off the squad spam & Random Kill Announcements with @noyell in chat! Default is on!";
 // Times
-int yellTime = 5; // seconds
-int secondNoticeSpawnCount = 5;
+int yellTime = 10; // seconds
+int secondNoticeSpawnCount = 3;
 
 /* CODE */
 
@@ -15,9 +15,16 @@ if (player.Data.issetInt(key)) count = player.Data.getInt(key);
 
 count = count + 1;
 
-if (count == secondNoticeSpawnCount) { // Second notice
+if (!player.Data.issetBool("NoYell"))
+{
+	player.Data.setBool("NoYell", true);
+}
 
-    plugin.SendPlayerMessage(player.Name, msg);
+if (count == secondNoticeSpawnCount) { // Second notice
+	if (player.Data.getBool("NoYell"))
+	{
+		plugin.SendPlayerMessage(player.Name, msg);
+	}
 	plugin.SendPlayerYell(player.Name, msg, yellTime);
 }
 

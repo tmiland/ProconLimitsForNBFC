@@ -14,6 +14,11 @@ int yellTime = 20; // seconds
 int secondNoticeSpawnCount = 3;
 
 /* CODE */
+// Disable for Reserverved Slots
+List<String> ReservervedSlots = plugin.GetReservedSlotsList();
+if (ReservervedSlots.Contains(player.Name)) {
+	return false;	
+}
 
 String key = "WelcomeRulesSniperLotto_" + player.Name;
 
